@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+<!--
+ * This file is part of the LibreOffice project.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * This file incorporates work covered by the following license notice:
+ *
+ *   Licensed to the Apache Software Foundation (ASF) under one or more
+ *   contributor license agreements. See the NOTICE file distributed
+ *   with this work for additional information regarding copyright
+ *   ownership. The ASF licenses this file to you under the Apache
+ *   License, Version 2.0 (the "License"); you may not use this file
+ *   except in compliance with the License. You may obtain a copy of
+ *   the License at http://www.apache.org/licenses/LICENSE-2.0 .
+-->
+
+<meta>
+  <topic id="textswritermain0110xml" indexer="include" status="PUBLISH">
+    <title id="tit" xml-lang="en-US">Table</title>
+    <filename>/text/swriter/main0110.xhp</filename>
+  </topic>
+</meta>
+
+<body>
+
+
+<section id="table">
+<bookmark xml-lang="en-US" branch="hid/.uno:TableMenu" id="bm_id1366008" localize="false"/>
+
+<paragraph id="par_idN10553" role="heading" level="1" xml-lang="en-US"><link href="text/swriter/main0110.xhp">Table</link></paragraph>
+<paragraph id="par_idN10563" role="paragraph" xml-lang="en-US"><ahelp hid=".">Shows commands to insert, edit, and delete a table and its elements inside a text document.</ahelp></paragraph>
+</section>
+
+<paragraph id="par_idN105AB" role="heading" level="2" xml-lang="en-US">Insert</paragraph>
+
+<paragraph id="par_idN105B5" role="heading" level="3" xml-lang="en-US">Table</paragraph>
+<paragraph id="par_idN105B8" role="paragraph" xml-lang="en-US">Inserts a new table.</paragraph>
+
+<paragraph id="par_idN105CD" role="heading" level="3" xml-lang="en-US">Columns</paragraph>
+<paragraph id="par_idN105D0" role="paragraph" xml-lang="en-US">Inserts columns.<comment>see also swriter/02/0410</comment></paragraph>
+
+<paragraph id="par_idN105E5" role="heading" level="3" xml-lang="en-US">Rows</paragraph>
+<paragraph id="par_idN105E8" role="paragraph" xml-lang="en-US">Inserts rows.<comment>see also swriter/02/0409</comment></paragraph>
+
+<paragraph id="par_idN105AF" role="heading" level="2" xml-lang="en-US">Delete</paragraph>
+<bookmark xml-lang="en-US" branch="hid/.uno:DeleteTable" id="bm_id7886898" localize="false"/>
+
+<paragraph id="par_idN1063E" role="heading" level="3" xml-lang="en-US">Table</paragraph>
+<paragraph id="par_idN1060A" role="paragraph" xml-lang="en-US"><ahelp hid="20529">Deletes the current table.</ahelp></paragraph>
+
+<paragraph id="par_idN1060D" role="heading" level="3" xml-lang="en-US">Columns</paragraph>
+<paragraph id="par_idN10610" role="paragraph" xml-lang="en-US">Deletes the selected columns.</paragraph>
+
+<paragraph id="par_idN1066A" role="heading" level="3" xml-lang="en-US">Rows</paragraph>
+<paragraph id="par_idN10616" role="paragraph" xml-lang="en-US">Deletes the selected rows.</paragraph>
+
+<paragraph id="par_idN105B3" role="heading" level="2" xml-lang="en-US">Select</paragraph>
+<bookmark xml-lang="en-US" branch="hid/.uno:SelectTable" id="bm_id3954588" localize="false"/>
+
+<paragraph id="par_idN10623" role="heading" level="3" xml-lang="en-US">Table</paragraph>
+<paragraph id="par_idN10626" role="paragraph" xml-lang="en-US"><ahelp hid=".">Selects the current table.</ahelp></paragraph>
+
+<paragraph id="par_idN10629" role="heading" level="3" xml-lang="en-US">Column</paragraph>
+<paragraph id="par_idN1062C" role="paragraph" xml-lang="en-US">Selects the current column.</paragraph>
+
+<paragraph id="par_idN1062F" role="heading" level="3" xml-lang="en-US">Row</paragraph>
+<paragraph id="par_idN10632" role="paragraph" xml-lang="en-US">Selects the current row.</paragraph>
+<bookmark xml-lang="en-US" branch="hid/.uno:EntireCell" id="bm_id6957914" localize="false"/>
+
+<paragraph id="par_idN10635" role="heading" level="3" xml-lang="en-US">Cell</paragraph>
+<paragraph id="par_idN10638" role="paragraph" xml-lang="en-US"><ahelp hid="20530">Selects the current cell.</ahelp></paragraph>
+
+<paragraph id="par_idN105B7" role="heading" level="2" xml-lang="en-US"><link href="text/shared/01/05100100.xhp">Merge Cells</link></paragraph>
+<embed href="text/shared/01/05100100.xhp#verbindentext"/>
+
+<paragraph id="par_idN105BB" role="heading" level="2" xml-lang="en-US"><link href="text/shared/01/05100200.xhp">Split Cells</link></paragraph>
+<embed href="text/shared/01/05100200.xhp#teilentext"/>
+<embed href="text/swriter/01/05200000.xhp#tabelleverb"/>
+<embed href="text/swriter/01/05190000.xhp#tabelleauf"/>
+
+<paragraph id="par_idN105F7" role="heading" level="2" xml-lang="en-US"><link href="text/swriter/01/05150101.xhp">Table AutoFormat</link></paragraph>
+<embed href="text/swriter/01/05150101.xhp#autoformattabelle"/>
+
+<paragraph id="par_idN105FB" role="heading" level="2" xml-lang="en-US">Autofit</paragraph>
+
+<paragraph id="par_idN106B5" role="heading" level="3" xml-lang="en-US">Column width</paragraph>
+<paragraph id="par_idN106B8" role="paragraph" xml-lang="en-US">Opens the Column Width dialog where you can change the width of a column.</paragraph>
+
+<paragraph id="par_idN106BB" role="heading" level="3" xml-lang="en-US"><link href="text/swriter/01/05120200.xhp">Optimal Column Width</link></paragraph>
+<embed href="text/swriter/01/05120200.xhp#spaltenbreitetext"/>
+
+<paragraph id="par_idN106D2" role="heading" level="3" xml-lang="en-US"><link href="text/shared/01/05120600.xhp">Distribute Columns Evenly</link></paragraph>
+<embed href="text/shared/01/05120600.xhp#verteilentext"/>
+
+<paragraph id="par_idN106E9" role="heading" level="3" xml-lang="en-US">Row Height</paragraph>
+<paragraph id="par_idN106EC" role="paragraph" xml-lang="en-US">Opens the Row Height dialog where you can change the height of a row.</paragraph>
+
+<paragraph id="par_idN106EF" role="heading" level="3" xml-lang="en-US"><link href="text/swriter/01/05110200.xhp">Optimal Row Height</link></paragraph>
+<embed href="text/swriter/01/05110200.xhp#zeilenhoehetext"/>
+
+<paragraph id="par_idN10706" role="heading" level="3" xml-lang="en-US"><link href="text/shared/01/05110600m.xhp">Distribute Rows Evenly</link></paragraph>
+<embed href="text/shared/01/05110600m.xhp#verteilentext"/><comment>UFI: removed help ids</comment>
+
+<paragraph id="par_idN1071D" role="heading" level="3" xml-lang="en-US">Allow Row to Break Across Pages and Columns</paragraph>
+<paragraph id="par_idN10720" role="paragraph" xml-lang="en-US"><ahelp hid="21753">Allows a page break within the current row.</ahelp></paragraph>
+<bookmark xml-lang="en-US" branch="hid/.uno:HeadingRowsRepeat" id="bm_id7787408" localize="false"/>
+
+<paragraph id="par_idN105FF" role="heading" level="2" xml-lang="en-US">Heading Rows Repeat</paragraph>
+<paragraph id="par_idN1072D" role="paragraph" xml-lang="en-US"><ahelp hid="20520">Repeats the table headers on subsequent pages if the table spans one or more pages.</ahelp><comment>see swriter\guide\table_repeat_multiple_headers</comment></paragraph>
+
+<paragraph id="par_idN10603" role="heading" level="2" xml-lang="en-US">Convert</paragraph>
+<bookmark xml-lang="en-US" branch="hid/.uno:ConvertTextToTable" id="bm_id1469161" localize="false"/>
+
+<paragraph id="par_idN1074C" role="heading" level="3" xml-lang="en-US">Text to Table</paragraph>
+<paragraph id="par_idN1074F" role="paragraph" xml-lang="en-US"><ahelp hid="." visibility="hidden">Opens a dialog where you can convert the selected text to a table.</ahelp> Opens <link href="text/swriter/01/06090000.xhp">a dialog</link> where you can convert the selected text to a table.</paragraph>
+<bookmark xml-lang="en-US" branch="hid/.uno:ConvertTableToText" id="bm_id3982665" localize="false"/>
+
+<paragraph id="par_idN10763" role="heading" level="3" xml-lang="en-US">Table to Text</paragraph>
+<paragraph id="par_idN10766" role="paragraph" xml-lang="en-US"><ahelp hid="." visibility="hidden">Opens a dialog where you can convert the current table to text.</ahelp> Opens <link href="text/swriter/01/06090000.xhp">a dialog</link> where you can convert the current table to text.</paragraph>
+
+<paragraph id="par_idN10607" role="heading" level="2" xml-lang="en-US"><link href="text/swriter/01/06100000.xhp">Sort</link></paragraph>
+<embed href="text/swriter/01/06100000.xhp#sort"/><comment>UFI: removed help ids</comment>
+
+<paragraph id="par_idN1092F" role="heading" level="2" xml-lang="en-US">Formula</paragraph>
+<paragraph id="par_idN10933" role="paragraph" xml-lang="en-US">Opens the <link href="text/swriter/main0214.xhp">Formula bar</link> to enter or edit a formula.</paragraph>
+
+<paragraph id="par_idN1060F" role="heading" level="2" xml-lang="en-US">Number Format</paragraph>
+<paragraph id="par_idN107AC" role="paragraph" xml-lang="en-US">Opens <link href="text/shared/optionen/01040500.xhp">a dialog</link> where you can specifiy the format of numbers in the table.</paragraph>
+<bookmark xml-lang="en-US" branch="hid/20459" id="bm_id4031800" localize="false"/>
+
+<paragraph id="par_idN10617" role="heading" level="2" xml-lang="en-US"><link href="text/swriter/01/05090000.xhp">Table Properties</link></paragraph>
+<embed href="text/swriter/01/05090000.xhp#tabelletext"/>
+</body>
+
+</helpdocument>

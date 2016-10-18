@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+<!--
+ * This file is part of the LibreOffice project.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * This file incorporates work covered by the following license notice:
+ *
+ *   Licensed to the Apache Software Foundation (ASF) under one or more
+ *   contributor license agreements. See the NOTICE file distributed
+ *   with this work for additional information regarding copyright
+ *   ownership. The ASF licenses this file to you under the Apache
+ *   License, Version 2.0 (the "License"); you may not use this file
+ *   except in compliance with the License. You may obtain a copy of
+ *   the License at http://www.apache.org/licenses/LICENSE-2.0 .
+-->
+
+<meta>
+  <topic id="textsbasicshared03120103xml" indexer="include" status="PUBLISH">
+    <title id="tit" xml-lang="en-US">Str Function [Runtime]</title>
+    <filename>/text/sbasic/shared/03120103.xhp</filename>
+  </topic>
+</meta>
+
+<body>
+
+
+<section id="str">
+<bookmark xml-lang="en-US" branch="index" id="bm_id3143272">
+  <bookmark_value>Str function</bookmark_value>
+</bookmark>
+
+
+<paragraph id="hd_id3143272" role="heading" level="1" xml-lang="en-US"><link href="text/sbasic/shared/03120103.xhp" name="Str Function [Runtime]">Str Function [Runtime]</link></paragraph>
+<paragraph id="par_id3155100" role="paragraph" xml-lang="en-US">Converts a numeric expression into a string.</paragraph>
+</section>
+
+<paragraph id="hd_id3109850" role="heading" level="2" xml-lang="en-US">Syntax:</paragraph>
+<bascode>
+<paragraph id="par_id3149497" role="bascode" xml-lang="en-US">Str (Expression)</paragraph>
+</bascode>
+
+<paragraph id="hd_id3150040" role="heading" level="2" xml-lang="en-US">Return value:</paragraph>
+<paragraph id="par_id3146117" role="paragraph" xml-lang="en-US">String</paragraph>
+
+<paragraph id="hd_id3155805" role="heading" level="2" xml-lang="en-US">Parameters:</paragraph>
+<paragraph id="par_id3149178" role="paragraph" xml-lang="en-US"> <emph>Expression: </emph>Any numeric expression.</paragraph>
+<paragraph id="par_id3146958" role="paragraph" xml-lang="en-US">The <emph>Str</emph> function converts a numeric variable, or the result of a calculation into a string. Negative numbers are preceded by a minus sign. Positive numbers are preceded by a space (instead of the plus sign).</paragraph>
+<embed href="text/sbasic/shared/00000003.xhp#errorcode"/>
+<embed href="text/sbasic/shared/00000003.xhp#err5"/>
+
+<paragraph id="hd_id3155419" role="heading" level="2" xml-lang="en-US">Example:</paragraph>
+<bascode>
+<paragraph id="par_idm1341439760" role="bascode" localize="false" xml-lang="en-US">Sub ExampleStr</paragraph>
+<paragraph id="par_idm1341438528" role="bascode" localize="false" xml-lang="en-US">Dim iVar As Single</paragraph>
+<paragraph id="par_idm1341437296" role="bascode" localize="false" xml-lang="en-US">Dim sVar As String</paragraph>
+<paragraph id="par_idm1341436064" role="bascode" localize="false" xml-lang="en-US">    iVar = 123.123</paragraph>
+<paragraph id="par_idm1341434832" role="bascode" localize="false" xml-lang="en-US">    sVar = LTrim(Str(iVar))</paragraph>
+<paragraph id="par_idm1341433584" role="bascode" localize="false" xml-lang="en-US">    MsgBox sVar &amp; chr(13) &amp; Str(iVar)</paragraph>
+<paragraph id="par_idm1341432272" role="bascode" localize="false" xml-lang="en-US">End Sub</paragraph>
+</bascode>
+</body>
+
+</helpdocument>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+<!--
+ * This file is part of the LibreOffice project.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * This file incorporates work covered by the following license notice:
+ *
+ *   Licensed to the Apache Software Foundation (ASF) under one or more
+ *   contributor license agreements. See the NOTICE file distributed
+ *   with this work for additional information regarding copyright
+ *   ownership. The ASF licenses this file to you under the Apache
+ *   License, Version 2.0 (the "License"); you may not use this file
+ *   except in compliance with the License. You may obtain a copy of
+ *   the License at http://www.apache.org/licenses/LICENSE-2.0 .
+-->
+
+<meta>
+  <topic id="textsbasicshared03100700xml" indexer="include" status="PUBLISH">
+    <title id="tit" xml-lang="en-US">Const Statement [Runtime]</title>
+    <filename>/text/sbasic/shared/03100700.xhp</filename>
+  </topic>
+</meta>
+
+<body>
+
+
+<section id="const">
+<bookmark xml-lang="en-US" branch="index" id="bm_id3146958">
+  <bookmark_value>Const statement</bookmark_value>
+</bookmark>
+
+
+<paragraph id="hd_id3146958" role="heading" level="1" xml-lang="en-US"><link href="text/sbasic/shared/03100700.xhp" name="Const Statement [Runtime]">Const Statement [Runtime]</link></paragraph>
+<paragraph id="par_id3154143" role="paragraph" xml-lang="en-US">Defines a string as a constant.</paragraph>
+</section>
+
+<paragraph id="hd_id3150670" role="heading" level="2" xml-lang="en-US">Syntax:</paragraph>
+<bascode>
+<paragraph id="par_id3150984" role="bascode" xml-lang="en-US">Const Text = Expression</paragraph>
+</bascode>
+
+<paragraph id="hd_id3147530" role="heading" level="2" xml-lang="en-US">Parameters:</paragraph>
+<paragraph id="par_id3153897" role="paragraph" xml-lang="en-US"> <emph>Text:</emph> Any constant name that follows the standard variable naming conventions.</paragraph>
+<paragraph id="par_id3147264" role="paragraph" xml-lang="en-US">A constant is a variable that helps to improve the readability of a program. Constants are not defined as a specific type of variable, but rather are used as placeholders in the code. You can only define a constant once and it cannot be modified. Use the following statement to define a constant:</paragraph>
+<paragraph id="par_id3150542" role="paragraph" xml-lang="en-US">CONST ConstName=Expression</paragraph>
+<paragraph id="par_id3150400" role="paragraph" xml-lang="en-US">The type of expression is irrelevant. If a program is started, $[officename] Basic converts the program code internally so that each time a constant is used, the defined expression replaces it.</paragraph>
+
+<paragraph id="hd_id3154366" role="heading" level="2" xml-lang="en-US">Example:</paragraph>
+<bascode>
+<paragraph id="par_idm1341161984" role="bascode" localize="false" xml-lang="en-US">Sub ExampleConst</paragraph>
+<paragraph id="par_idm1341160752" role="bascode" localize="false" xml-lang="en-US">    Const iVar = 1964</paragraph>
+<paragraph id="par_idm1341159520" role="bascode" localize="false" xml-lang="en-US">    MsgBox iVar</paragraph>
+<paragraph id="par_id3153969" role="bascode" xml-lang="en-US">    Const sVar = "Program", dVar As Double = 1.00</paragraph>
+<paragraph id="par_idm1341156544" role="bascode" localize="false" xml-lang="en-US">    MsgBox sVar &amp; " " &amp; dVar</paragraph>
+<paragraph id="par_idm1341155296" role="bascode" localize="false" xml-lang="en-US">End Sub</paragraph>
+</bascode>
+</body>
+
+</helpdocument>

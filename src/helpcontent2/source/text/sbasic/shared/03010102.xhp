@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+<!--
+ * This file is part of the LibreOffice project.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * This file incorporates work covered by the following license notice:
+ *
+ *   Licensed to the Apache Software Foundation (ASF) under one or more
+ *   contributor license agreements. See the NOTICE file distributed
+ *   with this work for additional information regarding copyright
+ *   ownership. The ASF licenses this file to you under the Apache
+ *   License, Version 2.0 (the "License"); you may not use this file
+ *   except in compliance with the License. You may obtain a copy of
+ *   the License at http://www.apache.org/licenses/LICENSE-2.0 .
+-->
+
+<meta>
+  <topic id="textsbasicshared03010102xml" indexer="include" status="PUBLISH">
+    <title id="tit" xml-lang="en-US">MsgBox Function [Runtime]</title>
+    <filename>/text/sbasic/shared/03010102.xhp</filename>
+  </topic>
+</meta>
+
+<body>
+
+
+<section id="msgbox">
+<bookmark xml-lang="en-US" branch="index" id="bm_id3153379">
+  <bookmark_value>MsgBox function</bookmark_value>
+</bookmark>
+
+
+<paragraph id="hd_id3153379" role="heading" level="1" xml-lang="en-US"><link href="text/sbasic/shared/03010102.xhp" name="MsgBox Function [Runtime]">MsgBox Function [Runtime]</link></paragraph>
+<paragraph id="par_id3145171" role="paragraph" xml-lang="en-US">Displays a dialog box containing a message and returns a value.</paragraph>
+</section>
+
+<paragraph id="hd_id3156281" role="heading" level="2" xml-lang="en-US">Syntax:</paragraph>
+<bascode>
+<paragraph id="par_id3154685" role="bascode" xml-lang="en-US">MsgBox (Text As String [,Type As Integer [,Dialogtitle As String]])</paragraph>
+</bascode>
+
+<paragraph id="hd_id3153771" role="heading" level="2" xml-lang="en-US">Return value:</paragraph>
+<paragraph id="par_id3146985" role="paragraph" xml-lang="en-US">Integer</paragraph>
+
+<paragraph id="hd_id3153363" role="heading" level="2" xml-lang="en-US">Parameter:</paragraph>
+<paragraph id="par_id3153727" role="paragraph" xml-lang="en-US"> <emph>Text</emph>: String expression displayed as a message in the dialog box. Line breaks can be inserted with Chr$(13).</paragraph>
+<paragraph id="par_id3147317" role="paragraph" xml-lang="en-US"> <emph>DialogTitle</emph>: String expression displayed in the title bar of the dialog. If omitted, the name of the respective application is displayed.</paragraph>
+<paragraph id="par_id3153954" role="paragraph" xml-lang="en-US"> <emph>Type</emph>: Any integer expression that specifies the dialog type and defines the number and type of buttons or icons displayed. <emph>Type</emph> represents a combination of bit patterns (dialog elements defined by adding the respective values):</paragraph>
+<paragraph id="par_id3154319" role="paragraph" xml-lang="en-US"> <emph>Values</emph> </paragraph>
+<paragraph id="par_id3147397" role="paragraph" xml-lang="en-US">0 : Display OK button only.</paragraph>
+<paragraph id="par_id3145646" role="paragraph" xml-lang="en-US">1 : Display OK and Cancel buttons.</paragraph>
+<paragraph id="par_id3149410" role="paragraph" xml-lang="en-US">2 : Display Abort, Retry, and Ignore buttons.</paragraph>
+<paragraph id="par_id3151075" role="paragraph" xml-lang="en-US">3 : Display Yes, No, and Cancel buttons.</paragraph>
+<paragraph id="par_id3153878" role="paragraph" xml-lang="en-US">4 : Display Yes and No buttons.</paragraph>
+<paragraph id="par_id3155601" role="paragraph" xml-lang="en-US">5 : Display Retry and Cancel buttons.</paragraph>
+<paragraph id="par_id3150716" role="paragraph" xml-lang="en-US">16 : Add the Stop icon to the dialog.</paragraph>
+<paragraph id="par_id3153837" role="paragraph" xml-lang="en-US">32 : Add the Question icon to the dialog.</paragraph>
+<paragraph id="par_id3150751" role="paragraph" xml-lang="en-US">48 : Add the Exclamation Point icon to the dialog.</paragraph>
+<paragraph id="par_id3146915" role="paragraph" xml-lang="en-US">64 : Add the Information icon to the dialog.</paragraph>
+<paragraph id="par_id3145640" role="paragraph" xml-lang="en-US">128 : First button in the dialog as default button.</paragraph>
+<paragraph id="par_id3153765" role="paragraph" xml-lang="en-US">256 : Second button in the dialog as default button.</paragraph>
+<paragraph id="par_id3153715" role="paragraph" xml-lang="en-US">512 : Third button in the dialog as default button.</paragraph>
+<paragraph id="par_id3159267" role="paragraph" xml-lang="en-US"> <emph>Return value:</emph> </paragraph>
+<paragraph id="par_id3145230" role="paragraph" xml-lang="en-US">1 : OK</paragraph>
+<paragraph id="par_id3149567" role="paragraph" xml-lang="en-US">2 : Cancel</paragraph>
+<paragraph id="par_id4056825" role="paragraph" xml-lang="en-US">3 : Abort</paragraph>
+<paragraph id="par_id3155335" role="paragraph" xml-lang="en-US">4 : Retry</paragraph>
+<paragraph id="par_id3146918" role="paragraph" xml-lang="en-US">5 : Ignore</paragraph>
+<paragraph id="par_id3155961" role="paragraph" xml-lang="en-US">6 : Yes</paragraph>
+<paragraph id="par_id3148488" role="paragraph" xml-lang="en-US">7 : No</paragraph>
+<embed href="text/sbasic/shared/00000003.xhp#errorcode"/>
+<embed href="text/sbasic/shared/00000003.xhp#err5"/>
+
+<paragraph id="hd_id3150090" role="heading" level="2" xml-lang="en-US">Example:</paragraph>
+<bascode>
+<paragraph id="par_idm1340837456" role="bascode" localize="false" xml-lang="en-US">Sub ExampleMsgBox</paragraph>
+<paragraph id="par_idm1340836224" role="bascode" localize="false" xml-lang="en-US">Dim sVar As Integer</paragraph>
+<paragraph id="par_id3151278" role="bascode" xml-lang="en-US">    sVar = MsgBox("Las Vegas")</paragraph>
+<paragraph id="par_id3149034" role="bascode" xml-lang="en-US">    sVar = MsgBox("Las Vegas",1)</paragraph>
+<paragraph id="par_id3166424" role="bascode" xml-lang="en-US">    sVar = MsgBox( "Las Vegas",256 + 16 + 2,"Dialog title")</paragraph>
+<paragraph id="par_idm1340829728" role="bascode" localize="false" xml-lang="en-US">End Sub</paragraph>
+</bascode>
+</body>
+
+</helpdocument>

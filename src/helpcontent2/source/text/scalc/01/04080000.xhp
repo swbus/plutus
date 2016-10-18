@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+<!--
+ * This file is part of the LibreOffice project.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * This file incorporates work covered by the following license notice:
+ *
+ *   Licensed to the Apache Software Foundation (ASF) under one or more
+ *   contributor license agreements. See the NOTICE file distributed
+ *   with this work for additional information regarding copyright
+ *   ownership. The ASF licenses this file to you under the Apache
+ *   License, Version 2.0 (the "License"); you may not use this file
+ *   except in compliance with the License. You may obtain a copy of
+ *   the License at http://www.apache.org/licenses/LICENSE-2.0 .
+-->
+
+<meta>
+  <topic id="textscalc0104080000xml" indexer="include" status="PUBLISH">
+    <title id="tit" xml-lang="en-US">Function List</title>
+    <filename>/text/scalc/01/04080000.xhp</filename>
+  </topic>
+</meta>
+
+<body>
+
+<bookmark xml-lang="en-US" branch="index" id="bm_id3154126">
+  <bookmark_value>formula list window</bookmark_value>
+  <bookmark_value>function list window</bookmark_value>
+  <bookmark_value>inserting functions; function list window</bookmark_value>
+</bookmark>
+
+<bookmark xml-lang="en-US" branch="hid/.uno:FunctionBox" id="bm_id998166" localize="false"/>
+
+<paragraph id="hd_id3154126" role="heading" level="1" xml-lang="en-US"><variable id="function_list_title"><link href="text/scalc/01/04080000.xhp" name="Function List">Function List</link></variable></paragraph>
+<paragraph id="par_id3151118" role="paragraph" xml-lang="en-US"><variable id="function_list_text"><ahelp hid="HID_SC_FUNCTIONLIST">Opens the Function List deck of the Sidebar, which displays all functions that can be inserted into your document.</ahelp></variable> The <emph>Function List</emph> deck is similar to the <emph>Functions</emph> tab page of the <link href="text/scalc/01/04060000.xhp" name="Function Wizard">Function Wizard</link>. The functions are inserted with placeholders to be replaced with your own values.</paragraph>
+
+<section id="howtoget">
+<embed href="text/scalc/00/00000404.xhp#funktionsliste"/>
+</section>
+<paragraph id="par_id3152576" role="paragraph" xml-lang="en-US">The <emph>Function List</emph> window is a resizable <link href="text/shared/00/00000005.xhp#andocken" name="dockable window">dockable window</link>. Use it to quickly enter functions in the spreadsheet. By double-clicking an entry in the functions list, the respective function is directly inserted with all parameters.</paragraph>
+<bookmark xml-lang="en-US" branch="hid/sc:ListBox:FID_FUNCTION_BOX:CB_CAT" id="bm_id3149960" localize="false"/>
+
+<paragraph id="hd_id3145799" role="heading" level="2" xml-lang="en-US">Category List</paragraph>
+<embed href="text/scalc/01/04060000.xhp#kategorienliste"/>
+<bookmark xml-lang="en-US" branch="hid/sc:ListBox:FID_FUNCTION_BOX:LB_FUNC" id="bm_id3147126" localize="false"/>
+
+<paragraph id="hd_id3153160" role="heading" level="2" xml-lang="en-US">Function List</paragraph>
+<paragraph id="par_id3149412" role="paragraph" xml-lang="en-US"><ahelp hid="SC:LISTBOX:FID_FUNCTION_BOX:LB_FUNC">Displays the available functions.</ahelp> When you select a function, the area below the list box displays a short description. To insert the selected function double-click it or click the <emph>Insert Function into calculation sheet</emph> icon.</paragraph>
+<bookmark xml-lang="en-US" branch="hid/sc:ImageButton:FID_FUNCTION_BOX:IMB_INSERT" id="bm_id3150752" localize="false"/>
+
+<paragraph id="hd_id3146971" role="heading" level="2" xml-lang="en-US">Insert Function into calculation sheet</paragraph>
+
+<table id="tbl_id3153711">
+  <tablerow>
+    <tablecell>
+      <paragraph id="par_id3150043" role="paragraph" xml-lang="en-US"> <image id="img_id3159267" src="sc/res/fx.png"><alt id="alt_id3159267" xml-lang="en-US">Icon</alt></image></paragraph>
+    </tablecell>
+    <tablecell>
+      <paragraph id="par_id3147345" role="paragraph" xml-lang="en-US"><ahelp hid="SC:IMAGEBUTTON:FID_FUNCTION_BOX:IMB_INSERT">Inserts the selected function into the document.</ahelp></paragraph>
+    </tablecell>
+  </tablerow>
+</table>
+
+</body>
+
+</helpdocument>

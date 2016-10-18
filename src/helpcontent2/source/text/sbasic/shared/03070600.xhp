@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+<!--
+ * This file is part of the LibreOffice project.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * This file incorporates work covered by the following license notice:
+ *
+ *   Licensed to the Apache Software Foundation (ASF) under one or more
+ *   contributor license agreements. See the NOTICE file distributed
+ *   with this work for additional information regarding copyright
+ *   ownership. The ASF licenses this file to you under the Apache
+ *   License, Version 2.0 (the "License"); you may not use this file
+ *   except in compliance with the License. You may obtain a copy of
+ *   the License at http://www.apache.org/licenses/LICENSE-2.0 .
+-->
+
+<meta>
+  <topic id="textsbasicshared03070600xml" indexer="include" status="PUBLISH">
+    <title id="tit" xml-lang="en-US">Mod-Operator [Runtime]</title>
+    <filename>/text/sbasic/shared/03070600.xhp</filename>
+  </topic>
+</meta>
+
+<body>
+
+
+<section id="mod">
+<bookmark xml-lang="en-US" branch="index" id="bm_id3150669">
+  <bookmark_value>MOD  operator (mathematical)</bookmark_value>
+</bookmark>
+
+
+<paragraph id="hd_id3150669" role="heading" level="1" xml-lang="en-US"><link href="text/sbasic/shared/03070600.xhp" name="Mod-Operator [Runtime]">Mod Operator [Runtime]</link></paragraph>
+<paragraph id="par_id3148686" role="paragraph" xml-lang="en-US">Returns the integer remainder of a division.</paragraph>
+</section>
+
+<paragraph id="hd_id3146795" role="heading" level="2" xml-lang="en-US">Syntax:</paragraph>
+<bascode>
+<paragraph id="par_id3147560" role="bascode" xml-lang="en-US">Result = Expression1 MOD Expression2</paragraph>
+</bascode>
+
+<paragraph id="hd_id3149657" role="heading" level="2" xml-lang="en-US">Return value:</paragraph>
+<paragraph id="par_id3153380" role="paragraph" xml-lang="en-US">Integer</paragraph>
+
+<paragraph id="hd_id3154365" role="heading" level="2" xml-lang="en-US">Parameters:</paragraph>
+<paragraph id="par_id3145172" role="paragraph" xml-lang="en-US"> <emph>Result:</emph> Any numeric variable that contains the result of the MOD operation.</paragraph>
+<paragraph id="par_id3151042" role="paragraph" xml-lang="en-US"> <emph>Expression1, Expression2:</emph> Any numeric expressions that you want to divide.</paragraph>
+
+<paragraph id="hd_id3147287" role="heading" level="2" xml-lang="en-US">Example:</paragraph>
+<bascode>
+<paragraph id="par_idm1340853360" role="bascode" localize="false" xml-lang="en-US">Sub ExampleMod</paragraph>
+<paragraph id="par_id3161832" role="bascode" xml-lang="en-US">    Print 10 Mod 2.5 ' returns 0</paragraph>
+<paragraph id="par_id3146922" role="bascode" xml-lang="en-US">    Print 10 / 2.5 ' returns 4</paragraph>
+<paragraph id="par_id3145273" role="bascode" xml-lang="en-US">    Print 10 Mod 5 ' returns 0</paragraph>
+<paragraph id="par_id3150011" role="bascode" xml-lang="en-US">    Print 10 / 5 ' returns 2</paragraph>
+<paragraph id="par_id3149483" role="bascode" xml-lang="en-US">    Print 5 Mod 10 ' returns 5</paragraph>
+<paragraph id="par_id3151114" role="bascode" xml-lang="en-US">    Print 5 / 10 ' returns 0.5</paragraph>
+<paragraph id="par_idm1340841712" role="bascode" localize="false" xml-lang="en-US">End Sub</paragraph>
+</bascode>
+</body>
+
+</helpdocument>

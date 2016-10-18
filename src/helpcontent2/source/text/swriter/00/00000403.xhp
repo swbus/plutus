@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+<!--
+ * This file is part of the LibreOffice project.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * This file incorporates work covered by the following license notice:
+ *
+ *   Licensed to the Apache Software Foundation (ASF) under one or more
+ *   contributor license agreements. See the NOTICE file distributed
+ *   with this work for additional information regarding copyright
+ *   ownership. The ASF licenses this file to you under the Apache
+ *   License, Version 2.0 (the "License"); you may not use this file
+ *   except in compliance with the License. You may obtain a copy of
+ *   the License at http://www.apache.org/licenses/LICENSE-2.0 .
+-->
+
+<meta>
+  <topic id="textswriter0000000403xml" indexer="exclude" status="PUBLISH">
+    <title id="tit" xml-lang="en-US">View Menu</title>
+    <filename>/text/swriter/00/00000403.xhp</filename>
+  </topic>
+</meta>
+
+<body>
+
+
+<paragraph id="hd_id3154656" role="heading" level="1" xml-lang="en-US">View Menu</paragraph>
+<paragraph id="par_id3149502" role="paragraph" xml-lang="en-US"><variable id="lineal">Choose <emph>View - Rulers - Rulers</emph> </variable></paragraph>
+<paragraph id="par_id3148871" role="paragraph" xml-lang="en-US"><variable id="textbegrenzungen">Choose <emph>View - Text Boundaries</emph> </variable></paragraph>
+
+<section id="markierungen">
+<paragraph id="par_id3153248" role="paragraph" xml-lang="en-US">Choose <emph>View - Field Shadings</emph> </paragraph>
+<paragraph id="par_id3154763" role="paragraph" xml-lang="en-US"><switchinline select="sys"><caseinline select="MAC">Command 
+</caseinline><defaultinline>Ctrl</defaultinline></switchinline>+F8</paragraph>
+</section>
+
+<section id="feldbefehle">
+<paragraph id="par_id3149052" role="paragraph" xml-lang="en-US">Choose <emph>View - Field Names</emph> </paragraph>
+<paragraph id="par_id3151387" role="paragraph" xml-lang="en-US"><switchinline select="sys"><caseinline select="MAC">Command 
+</caseinline><defaultinline>Ctrl</defaultinline></switchinline>+F9</paragraph>
+</section>
+
+<section id="steuerzeichen">
+<paragraph id="par_id3155625" role="paragraph" xml-lang="en-US">Choose <emph>View - Non-printing Characters</emph> </paragraph>
+<paragraph id="par_id3145823" role="paragraph" xml-lang="en-US"><switchinline select="sys"><caseinline select="MAC">Command 
+</caseinline><defaultinline>Ctrl</defaultinline></switchinline>+F10</paragraph>
+<paragraph id="par_id3154508" role="paragraph" xml-lang="en-US">On Standard bar, click</paragraph>
+
+<section id="systeuerzeichen">
+
+<table id="tbl_id3153732">
+  <tablerow>
+    <tablecell>
+      <paragraph id="par_id3150932" role="paragraph" xml-lang="en-US"> <image id="img_id3150502" src="cmd/sc_controlcodes.png"><alt xml-lang="en-US" id="alt_id3150502">Icon</alt></image></paragraph>
+    </tablecell>
+    <tablecell>
+      <paragraph id="par_id3153716" role="paragraph" xml-lang="en-US">Non-printing Characters</paragraph>
+    </tablecell>
+  </tablerow>
+</table>
+
+</section>
+</section>
+
+<section id="webbrowser">
+<paragraph id="par_id3149712" role="paragraph" xml-lang="en-US">Choose <emph>View - Web</emph></paragraph>
+<paragraph id="par_id3154640" role="paragraph" xml-lang="en-US">On Tools bar, enable</paragraph>
+
+<section id="sybrowser">
+
+<table id="tbl_id3151264">
+  <tablerow>
+    <tablecell>
+      <paragraph id="par_id3150765" role="paragraph" xml-lang="en-US"> <image id="img_id3147572" src="cmd/sc_browseview.png"><alt xml-lang="en-US" id="alt_id3147572">Icon</alt></image></paragraph>
+    </tablecell>
+    <tablecell>
+      <paragraph id="par_id3149291" role="paragraph" xml-lang="en-US">Web</paragraph>
+    </tablecell>
+  </tablerow>
+</table>
+
+</section>
+</section>
+
+<section id="drucklayout">
+<paragraph id="par_id3151176" role="paragraph" xml-lang="en-US">Choose <emph>View - Normal</emph><comment>removed table with icon (was copy/paste error)</comment></paragraph>
+</section>
+<paragraph id="par_id3149808" role="paragraph" xml-lang="en-US"><variable id="versteckteabs">Choose <emph>View - Hidden Paragraphs</emph> </variable></paragraph>
+</body>
+
+</helpdocument>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+<!--
+ * This file is part of the LibreOffice project.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * This file incorporates work covered by the following license notice:
+ *
+ *   Licensed to the Apache Software Foundation (ASF) under one or more
+ *   contributor license agreements. See the NOTICE file distributed
+ *   with this work for additional information regarding copyright
+ *   ownership. The ASF licenses this file to you under the Apache
+ *   License, Version 2.0 (the "License"); you may not use this file
+ *   except in compliance with the License. You may obtain a copy of
+ *   the License at http://www.apache.org/licenses/LICENSE-2.0 .
+-->
+
+<meta>
+  <topic id="textsbasicshared03130500xml" indexer="include" status="PUBLISH">
+    <title id="tit" xml-lang="en-US">Shell Function [Runtime]</title>
+    <filename>/text/sbasic/shared/03130500.xhp</filename>
+  </topic>
+</meta>
+
+<body>
+
+
+<section id="shell">
+<bookmark xml-lang="en-US" branch="index" id="bm_id3150040">
+  <bookmark_value>Shell function</bookmark_value>
+</bookmark>
+
+
+<paragraph id="hd_id3150040" role="heading" level="1" xml-lang="en-US"><link href="text/sbasic/shared/03130500.xhp" name="Shell Function [Runtime]">Shell Function [Runtime]</link></paragraph>
+<paragraph id="par_id3153394" role="paragraph" xml-lang="en-US">Starts another application and defines the respective window style, if necessary.</paragraph>
+</section>
+
+<paragraph id="hd_id3153345" role="heading" level="2" xml-lang="en-US">Syntax</paragraph>
+<paragraph id="par_id3147576" role="paragraph" xml-lang="en-US">Shell (Pathname As String[, Windowstyle As Integer][, Param As String][, bSync]) </paragraph>
+
+<paragraph id="hd_id3149235" role="heading" level="2" xml-lang="en-US">Parameter</paragraph>
+
+<paragraph id="hd_id3154306" role="heading" level="3" xml-lang="en-US">Pathname</paragraph>
+<paragraph id="par_id3155419" role="paragraph" xml-lang="en-US">Complete path and program name of the program that you want to start.</paragraph>
+
+<paragraph id="hd_id3150771" role="heading" level="3" xml-lang="en-US">Windowstyle</paragraph>
+<paragraph id="par_id3145609" role="paragraph" xml-lang="en-US">Optional integer expression that specifies the style of the window that the program is executed in. The following values are possible:</paragraph>
+
+<table id="tbl_id3156343">
+  <tablerow>
+    <tablecell>
+      <paragraph id="par_id3148663" role="paragraph" localize="false" xml-lang="en-US">0</paragraph>
+    </tablecell>
+    <tablecell>
+      <paragraph id="par_id3153360" role="paragraph" xml-lang="en-US">The focus is on the hidden program window.</paragraph>
+    </tablecell>
+  </tablerow>
+  <tablerow>
+    <tablecell>
+      <paragraph id="par_id3154123" role="paragraph" localize="false" xml-lang="en-US">1</paragraph>
+    </tablecell>
+    <tablecell>
+      <paragraph id="par_id3144760" role="paragraph" xml-lang="en-US">The focus is on the program window in standard size.</paragraph>
+    </tablecell>
+  </tablerow>
+  <tablerow>
+    <tablecell>
+      <paragraph id="par_id3156422" role="paragraph" localize="false" xml-lang="en-US">2</paragraph>
+    </tablecell>
+    <tablecell>
+      <paragraph id="par_id3148451" role="paragraph" xml-lang="en-US">The focus is on the minimized program window.</paragraph>
+    </tablecell>
+  </tablerow>
+  <tablerow>
+    <tablecell>
+      <paragraph id="par_id3149561" role="paragraph" localize="false" xml-lang="en-US">3</paragraph>
+    </tablecell>
+    <tablecell>
+      <paragraph id="par_id3146921" role="paragraph" xml-lang="en-US">focus is on the maximized program window.</paragraph>
+    </tablecell>
+  </tablerow>
+  <tablerow>
+    <tablecell>
+      <paragraph id="par_id3149481" role="paragraph" localize="false" xml-lang="en-US">4</paragraph>
+    </tablecell>
+    <tablecell>
+      <paragraph id="par_id3155854" role="paragraph" xml-lang="en-US">Standard size program window, without focus.</paragraph>
+    </tablecell>
+  </tablerow>
+  <tablerow>
+    <tablecell>
+      <paragraph id="par_id3145271" role="paragraph" localize="false" xml-lang="en-US">6</paragraph>
+    </tablecell>
+    <tablecell>
+      <paragraph id="par_id3152938" role="paragraph" xml-lang="en-US">Minimized program window, focus remains on the active window.</paragraph>
+    </tablecell>
+  </tablerow>
+  <tablerow>
+    <tablecell>
+      <paragraph id="par_id3146119" role="paragraph" localize="false" xml-lang="en-US">10</paragraph>
+    </tablecell>
+    <tablecell>
+      <paragraph id="par_id3151112" role="paragraph" xml-lang="en-US">Full-screen display.</paragraph>
+    </tablecell>
+  </tablerow>
+</table>
+
+
+<paragraph id="hd_id3150419" role="heading" level="3" xml-lang="en-US">Param</paragraph>
+<paragraph id="par_id3149412" role="paragraph" xml-lang="en-US">Any string expression that specifies the command line that want to pass.</paragraph>
+
+<paragraph id="hd_id3148456" role="heading" level="3" xml-lang="en-US">bSync</paragraph>
+<paragraph id="par_id3154096" role="paragraph" xml-lang="en-US">If this value is set to <emph>true</emph>, the <emph>Shell</emph> command and all $[officename] tasks wait until the shell process completes. If the value is set to <emph>false</emph>, the shell returns directly. The default value is <emph>false</emph>.</paragraph>
+<embed href="text/sbasic/shared/00000003.xhp#errorcode"/>
+<embed href="text/sbasic/shared/00000003.xhp#err5"/>
+<embed href="text/sbasic/shared/00000003.xhp#err53"/>
+<embed href="text/sbasic/shared/00000003.xhp#err73"/>
+
+<paragraph id="hd_id3154270" role="heading" level="2" xml-lang="en-US">Example</paragraph>
+<bascode>
+<paragraph id="par_idm1341273680" role="bascode" localize="false" xml-lang="en-US">Sub ExampleShellForWin</paragraph>
+<paragraph id="par_idm1341272448" role="bascode" localize="false" xml-lang="en-US">    Shell("c:\windows\calc.exe",2)</paragraph>
+<paragraph id="par_idm1341271200" role="bascode" localize="false" xml-lang="en-US">End Sub</paragraph>
+</bascode>
+</body>
+
+</helpdocument>

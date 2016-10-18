@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+<!--
+ * This file is part of the LibreOffice project.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * This file incorporates work covered by the following license notice:
+ *
+ *   Licensed to the Apache Software Foundation (ASF) under one or more
+ *   contributor license agreements. See the NOTICE file distributed
+ *   with this work for additional information regarding copyright
+ *   ownership. The ASF licenses this file to you under the Apache
+ *   License, Version 2.0 (the "License"); you may not use this file
+ *   except in compliance with the License. You may obtain a copy of
+ *   the License at http://www.apache.org/licenses/LICENSE-2.0 .
+-->
+
+<meta>
+  <topic id="textsbasicshared03010303xml" indexer="include" status="PUBLISH">
+    <title id="tit" xml-lang="en-US">Red Function [Runtime]</title>
+    <filename>/text/sbasic/shared/03010303.xhp</filename>
+  </topic>
+</meta>
+
+<body>
+
+
+<section id="red">
+<bookmark xml-lang="en-US" branch="index" id="bm_id3148947">
+  <bookmark_value>Red function</bookmark_value>
+</bookmark>
+
+
+<paragraph id="hd_id3148947" role="heading" level="1" xml-lang="en-US"><link href="text/sbasic/shared/03010303.xhp" name="Red Function [Runtime]">Red Function [Runtime]</link></paragraph>
+<paragraph id="par_id3149656" role="paragraph" xml-lang="en-US">Returns the Red component of the specified color code.</paragraph>
+</section>
+
+<paragraph id="hd_id3148799" role="heading" level="2" xml-lang="en-US">Syntax:</paragraph>
+<bascode>
+<paragraph id="par_id3150448" role="bascode" xml-lang="en-US">Red (ColorNumber As Long)</paragraph>
+</bascode>
+
+<paragraph id="hd_id3151042" role="heading" level="2" xml-lang="en-US">Return value:</paragraph>
+<paragraph id="par_id3145173" role="paragraph" xml-lang="en-US">Integer</paragraph>
+
+<paragraph id="hd_id3154685" role="heading" level="2" xml-lang="en-US">Parameter:</paragraph>
+<paragraph id="par_id3150440" role="paragraph" xml-lang="en-US"> <emph>ColorNumber</emph>: Long integer expression that specifies any <link href="text/sbasic/shared/00000003.xhp#farbcodes" name="color code">color code</link> for which to return the Red component.</paragraph>
+<embed href="text/sbasic/shared/00000003.xhp#errorcode"/>
+<embed href="text/sbasic/shared/00000003.xhp#err5"/>
+
+<paragraph id="hd_id3148575" role="heading" level="2" xml-lang="en-US">Example:</paragraph>
+<bascode>
+<paragraph id="par_idm1341092848" role="bascode" localize="false" xml-lang="en-US">Sub ExampleColor</paragraph>
+<paragraph id="par_idm1341091616" role="bascode" localize="false" xml-lang="en-US">Dim lVar As Long</paragraph>
+<paragraph id="par_idm1341090384" role="bascode" localize="false" xml-lang="en-US">    lVar = rgb(128,0,200)</paragraph>
+<paragraph id="par_id3147435" role="bascode" xml-lang="en-US">    MsgBox "The color " &amp; lVar &amp; " consists of:" &amp; Chr(13) &amp;_</paragraph>
+<paragraph id="par_id3155306" role="bascode" xml-lang="en-US">        "red= " &amp; red(lVar) &amp; Chr(13)&amp;_</paragraph>
+<paragraph id="par_id3149262" role="bascode" xml-lang="en-US">        "green= " &amp; green(lVar) &amp; Chr(13)&amp;_</paragraph>
+<paragraph id="par_id3147397" role="bascode" xml-lang="en-US">        "blue= " &amp; blue(lVar) &amp; Chr(13) , 64,"colors"</paragraph>
+<paragraph id="par_idm1341081888" role="bascode" localize="false" xml-lang="en-US">End Sub</paragraph>
+</bascode>
+</body>
+
+</helpdocument>

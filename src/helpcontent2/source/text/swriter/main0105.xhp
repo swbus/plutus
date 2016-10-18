@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+<!--
+ * This file is part of the LibreOffice project.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * This file incorporates work covered by the following license notice:
+ *
+ *   Licensed to the Apache Software Foundation (ASF) under one or more
+ *   contributor license agreements. See the NOTICE file distributed
+ *   with this work for additional information regarding copyright
+ *   ownership. The ASF licenses this file to you under the Apache
+ *   License, Version 2.0 (the "License"); you may not use this file
+ *   except in compliance with the License. You may obtain a copy of
+ *   the License at http://www.apache.org/licenses/LICENSE-2.0 .
+-->
+
+<meta>
+  <topic id="textswritermain0105xml" indexer="include" status="PUBLISH">
+    <title id="tit" xml-lang="en-US">Format</title>
+    <filename>/text/swriter/main0105.xhp</filename>
+  </topic>
+</meta>
+
+<body>
+
+
+<section id="format">
+<bookmark xml-lang="en-US" branch="hid/.uno:FormatMenu" id="bm_id3047160" localize="false"/>
+
+<paragraph id="hd_id3147820" role="heading" level="1" xml-lang="en-US"><link href="text/swriter/main0105.xhp" name="Format">Format</link></paragraph>
+<paragraph id="par_id3147218" role="paragraph" xml-lang="en-US"><ahelp hid=".uno:FormatMenu">Contains commands for formatting the layout and the contents of your document.</ahelp></paragraph>
+</section>
+<embed href="text/shared/01/05010000.xhp#standard"/>
+
+<paragraph id="hd_id3147261" role="heading" level="2" xml-lang="en-US"><link href="text/shared/01/05020000.xhp" name="Character">Character</link></paragraph>
+<embed href="text/shared/01/05020000.xhp#zeichentext"/>
+
+<paragraph id="hd_id3147286" role="heading" level="2" xml-lang="en-US"><link href="text/shared/01/05030000.xhp" name="Paragraph">Paragraph</link></paragraph>
+<embed href="text/shared/01/05030000.xhp#absatztext"/>
+
+<paragraph id="hd_id3145784" role="heading" level="2" xml-lang="en-US"><link href="text/shared/01/06050000.xhp" name="Numbering/Bullets">Bullets and Numbering</link></paragraph>
+<embed href="text/shared/01/06050000.xhp#numauftext"/>
+
+<paragraph id="hd_id3145692" role="heading" level="2" xml-lang="en-US"><link href="text/swriter/01/05040000.xhp" name="Page">Page</link></paragraph>
+<embed href="text/swriter/01/05040000.xhp#seitetext"/>
+<embed href="text/shared/01/05050000.xhp#grossklein"/>
+<embed href="text/shared/01/05060000.xhp#ruby"/>
+
+<paragraph id="hd_id3145743" role="heading" level="2" xml-lang="en-US"><link href="text/swriter/01/05040500.xhp" name="Columns">Columns</link></paragraph>
+<embed href="text/swriter/01/05040500.xhp#spaltentext"/>
+
+<paragraph id="hd_id3145717" role="heading" level="2" xml-lang="en-US"><link href="text/swriter/01/02170000.xhp" name="Sections">Sections</link></paragraph>
+<embed href="text/swriter/01/02170000.xhp#bereichetext"/>
+<embed href="text/swriter/01/05150000.xhp#autoformat"/>
+<embed href="text/shared/01/05260000.xhp#verankerung"/>
+<embed href="text/swriter/01/05060200.xhp#umlauf"/>
+<embed href="text/shared/01/05070000.xhp#ausrichtung"/>
+<embed href="text/shared/01/05080000.xhp#ausrichtung"/>
+<embed href="text/shared/01/05250000.xhp#anordnung"/>
+<embed href="text/shared/01/05240000.xhp#legende"/>
+<embed href="text/shared/01/05290000.xhp#gruppe"/>
+<embed href="text/swriter/01/format_object.xhp#object"/>
+
+<paragraph id="hd_id3149910" role="heading" level="2" xml-lang="en-US"><link href="text/swriter/01/04130000.xhp" name="Frame">Frame</link></paragraph>
+<embed href="text/swriter/01/04130000.xhp#rahm"/>
+
+<paragraph id="hd_id3149935" role="heading" level="2" xml-lang="en-US"><link href="text/swriter/01/05060000.xhp" name="Image">Image</link></paragraph>
+<embed href="text/swriter/01/05060000.xhp#grafiktext"/>
+</body>
+
+</helpdocument>

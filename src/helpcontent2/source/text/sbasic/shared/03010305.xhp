@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+<!--
+ * This file is part of the LibreOffice project.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * This file incorporates work covered by the following license notice:
+ *
+ *   Licensed to the Apache Software Foundation (ASF) under one or more
+ *   contributor license agreements. See the NOTICE file distributed
+ *   with this work for additional information regarding copyright
+ *   ownership. The ASF licenses this file to you under the Apache
+ *   License, Version 2.0 (the "License"); you may not use this file
+ *   except in compliance with the License. You may obtain a copy of
+ *   the License at http://www.apache.org/licenses/LICENSE-2.0 .
+-->
+
+<meta>
+  <topic id="textsbasicshared03010305xml" indexer="include" status="PUBLISH">
+    <title id="tit" xml-lang="en-US">RGB Function [Runtime]</title>
+    <filename>/text/sbasic/shared/03010305.xhp</filename>
+  </topic>
+</meta>
+
+<body>
+
+
+<section id="rgb">
+
+<paragraph id="hd_id3150792" role="heading" level="1" xml-lang="en-US"><link href="text/sbasic/shared/03010305.xhp" name="RGB Function [Runtime]">RGB Function [Runtime]</link></paragraph>
+<paragraph id="par_id3150447" role="paragraph" xml-lang="en-US">Returns a <link href="text/sbasic/shared/00000003.xhp#farbcodes" name="long integer color value">long integer color value</link> consisting of red, green, and blue components.</paragraph>
+</section>
+
+<paragraph id="hd_id3147229" role="heading" level="2" xml-lang="en-US">Syntax:</paragraph>
+<bascode>
+<paragraph id="par_id3155132" role="bascode" xml-lang="en-US">RGB (Red, Green, Blue)</paragraph>
+</bascode>
+
+<paragraph id="hd_id3156442" role="heading" level="2" xml-lang="en-US">Return value:</paragraph>
+<paragraph id="par_id3159153" role="paragraph" xml-lang="en-US">Long</paragraph>
+
+<paragraph id="hd_id3154013" role="heading" level="2" xml-lang="en-US">Parameter:</paragraph>
+<paragraph id="par_id3152597" role="paragraph" xml-lang="en-US"> <emph>Red</emph>: Any integer expression that represents the red component (0-255) of the composite color.</paragraph>
+<paragraph id="par_id3146974" role="paragraph" xml-lang="en-US"> <emph>Green</emph>: Any integer expression that represents the green component (0-255) of the composite color.</paragraph>
+<paragraph id="par_id3151113" role="paragraph" xml-lang="en-US"> <emph>Blue</emph>: Any integer expression that represents the blue component (0-255) of the composite color.</paragraph>
+<embed href="text/sbasic/shared/00000003.xhp#errorcode"/>
+<embed href="text/sbasic/shared/00000003.xhp#err5"/>
+
+<paragraph id="hd_id3147435" role="heading" level="2" xml-lang="en-US">Example:</paragraph>
+<bascode>
+<paragraph id="par_idm1340938032" role="bascode" localize="false" xml-lang="en-US">Sub ExampleColor</paragraph>
+<paragraph id="par_idm1340936800" role="bascode" localize="false" xml-lang="en-US">Dim lVar As Long</paragraph>
+<paragraph id="par_idm1340935568" role="bascode" localize="false" xml-lang="en-US">    lVar = rgb(128,0,200)</paragraph>
+<paragraph id="par_id3145647" role="bascode" xml-lang="en-US">    MsgBox "The color " &amp; lVar &amp; " consists of:" &amp; Chr(13) &amp;_</paragraph>
+<paragraph id="par_id3154491" role="bascode" xml-lang="en-US">        "red= " &amp; red(lVar) &amp; Chr(13)&amp;_</paragraph>
+<paragraph id="par_id3149401" role="bascode" xml-lang="en-US">        "green= " &amp; green(lVar) &amp; Chr(13)&amp;_</paragraph>
+<paragraph id="par_id3150716" role="bascode" xml-lang="en-US">        "blue= " &amp; blue(lVar) &amp; Chr(13) , 64,"colors"</paragraph>
+<paragraph id="par_idm1340927072" role="bascode" localize="false" xml-lang="en-US">End Sub</paragraph>
+</bascode>
+</body>
+
+</helpdocument>

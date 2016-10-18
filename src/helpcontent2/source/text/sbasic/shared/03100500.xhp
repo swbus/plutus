@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+<!--
+ * This file is part of the LibreOffice project.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * This file incorporates work covered by the following license notice:
+ *
+ *   Licensed to the Apache Software Foundation (ASF) under one or more
+ *   contributor license agreements. See the NOTICE file distributed
+ *   with this work for additional information regarding copyright
+ *   ownership. The ASF licenses this file to you under the Apache
+ *   License, Version 2.0 (the "License"); you may not use this file
+ *   except in compliance with the License. You may obtain a copy of
+ *   the License at http://www.apache.org/licenses/LICENSE-2.0 .
+-->
+
+<meta>
+  <topic id="textsbasicshared03100500xml" indexer="include" status="PUBLISH">
+    <title id="tit" xml-lang="en-US">CInt Function [Runtime]</title>
+    <filename>/text/sbasic/shared/03100500.xhp</filename>
+  </topic>
+</meta>
+
+<body>
+
+
+<section id="cint">
+<bookmark xml-lang="en-US" branch="index" id="bm_id3149346">
+  <bookmark_value>CInt function</bookmark_value>
+</bookmark>
+
+
+<paragraph id="hd_id3149346" role="heading" level="1" xml-lang="en-US"><link href="text/sbasic/shared/03100500.xhp" name="CInt Function [Runtime]">CInt Function [Runtime]</link></paragraph>
+<paragraph id="par_id3155419" role="paragraph" xml-lang="en-US">Converts any string or numeric expression to an integer.</paragraph>
+</section>
+
+<paragraph id="hd_id3147573" role="heading" level="2" xml-lang="en-US">Syntax:</paragraph>
+<bascode>
+<paragraph id="par_id3154142" role="bascode" xml-lang="en-US">CInt (Expression)</paragraph>
+</bascode>
+
+<paragraph id="hd_id3147531" role="heading" level="2" xml-lang="en-US">Return value:</paragraph>
+<paragraph id="par_id3147560" role="paragraph" xml-lang="en-US">Integer</paragraph>
+
+<paragraph id="hd_id3145069" role="heading" level="2" xml-lang="en-US">Parameters:</paragraph>
+<paragraph id="par_id3159414" role="paragraph" xml-lang="en-US"> <emph>Expression:</emph> Any numeric expression that you want to convert. If the <emph>Expression</emph> exceeds the value range between -32768 and 32767, $[officename] Basic reports an overflow error. To convert a string expression, the number must be entered as normal text ("123.5") using the default number format of your operating system.</paragraph>
+<paragraph id="par_id3150358" role="paragraph" xml-lang="en-US">This function always rounds the fractional part of a number to the nearest integer.</paragraph>
+<embed href="text/sbasic/shared/00000003.xhp#errorcode"/>
+<embed href="text/sbasic/shared/00000003.xhp#err5"/>
+
+<paragraph id="hd_id3145419" role="heading" level="2" xml-lang="en-US">Example:</paragraph>
+<bascode>
+<paragraph id="par_idm1341052912" role="bascode" localize="false" xml-lang="en-US">Sub ExampleCountryConvert</paragraph>
+<paragraph id="par_idm1341051664" role="bascode" localize="false" xml-lang="en-US">    MsgBox CDbl(1234.5678)</paragraph>
+<paragraph id="par_idm1341050416" role="bascode" localize="false" xml-lang="en-US">    MsgBox CInt(1234.5678)</paragraph>
+<paragraph id="par_idm1341049168" role="bascode" localize="false" xml-lang="en-US">    MsgBox CLng(1234.5678)</paragraph>
+<paragraph id="par_idm1341047920" role="bascode" localize="false" xml-lang="en-US">End Sub</paragraph>
+</bascode>
+</body>
+
+</helpdocument>

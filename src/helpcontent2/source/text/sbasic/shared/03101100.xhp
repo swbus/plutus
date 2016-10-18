@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<helpdocument version="1.0">
+<!--
+ * This file is part of the LibreOffice project.
+ *
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ *
+ * This file incorporates work covered by the following license notice:
+ *
+ *   Licensed to the Apache Software Foundation (ASF) under one or more
+ *   contributor license agreements. See the NOTICE file distributed
+ *   with this work for additional information regarding copyright
+ *   ownership. The ASF licenses this file to you under the Apache
+ *   License, Version 2.0 (the "License"); you may not use this file
+ *   except in compliance with the License. You may obtain a copy of
+ *   the License at http://www.apache.org/licenses/LICENSE-2.0 .
+-->
+
+<meta>
+  <topic id="textsbasicshared03101100xml" indexer="include" status="PUBLISH">
+    <title id="tit" xml-lang="en-US">DefBool Statement [Runtime]</title>
+    <filename>/text/sbasic/shared/03101100.xhp</filename>
+  </topic>
+</meta>
+
+<body>
+
+
+<section id="defbool">
+<bookmark xml-lang="en-US" branch="index" id="bm_id3145759">
+  <bookmark_value>DefBool statement</bookmark_value>
+</bookmark>
+
+
+<paragraph id="hd_id3145759" role="heading" level="1" xml-lang="en-US"><link href="text/sbasic/shared/03101100.xhp" name="DefBool Statement [Runtime]">DefBool Statement [Runtime]</link></paragraph>
+<paragraph id="par_id3153089" role="paragraph" xml-lang="en-US">If no type-declaration character or keyword is specified, the DefBool statement sets the default data type for variables, according to a letter range.</paragraph>
+</section>
+
+<paragraph id="hd_id3149495" role="heading" level="2" xml-lang="en-US">Syntax:</paragraph>
+<bascode>
+<paragraph id="par_id3150682" role="bascode" xml-lang="en-US">Defxxx Characterrange1[, Characterrange2[,...]]</paragraph>
+</bascode>
+
+<paragraph id="hd_id3159201" role="heading" level="2" xml-lang="en-US">Parameters:</paragraph>
+<paragraph id="par_id3147226" role="paragraph" xml-lang="en-US"> <emph>Characterrange:</emph> Letters that specify the range of variables that you want to set the default data type for.</paragraph>
+<paragraph id="par_id3149178" role="paragraph" xml-lang="en-US"> <emph>xxx:</emph> Keyword that defines the default variable type:</paragraph>
+<paragraph id="par_id3150669" role="paragraph" xml-lang="en-US"> <emph>Keyword: </emph>Default variable type</paragraph>
+<paragraph id="par_id3149233" role="paragraph" xml-lang="en-US"> <emph>DefBool:</emph> Boolean</paragraph>
+
+<paragraph id="hd_id3149762" role="heading" level="2" xml-lang="en-US">Example:</paragraph>
+<bascode>
+<paragraph id="par_id3156152" role="bascode" xml-lang="en-US">' Prefix definition for variable types:</paragraph>
+<paragraph id="par_idm1341573120" role="bascode" localize="false" xml-lang="en-US">DefBool b</paragraph>
+<paragraph id="par_idm1341571888" role="bascode" localize="false" xml-lang="en-US">DefDate t</paragraph>
+<paragraph id="par_idm1341570656" role="bascode" localize="false" xml-lang="en-US">DefDbl d</paragraph>
+<paragraph id="par_idm1341569424" role="bascode" localize="false" xml-lang="en-US">DefInt i</paragraph>
+<paragraph id="par_idm1341568192" role="bascode" localize="false" xml-lang="en-US">DefLng l</paragraph>
+<paragraph id="par_idm1341566960" role="bascode" localize="false" xml-lang="en-US">DefObj o</paragraph>
+<paragraph id="par_idm1341565728" role="bascode" localize="false" xml-lang="en-US">DefVar v</paragraph>
+<paragraph id="par_idm1341564496" role="bascode" localize="false" xml-lang="en-US">Sub ExampleDefBool</paragraph>
+<paragraph id="par_id3151381" role="bascode" xml-lang="en-US">    bOK=TRUE ' bOK is an implicit boolean variable</paragraph>
+<paragraph id="par_idm1341561520" role="bascode" localize="false" xml-lang="en-US">End Sub</paragraph>
+</bascode>
+</body>
+
+</helpdocument>
