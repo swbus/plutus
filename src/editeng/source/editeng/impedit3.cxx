@@ -2554,6 +2554,21 @@ void ImpEditEngine::SetVertical( bool bVertical )
     }
 }
 
+void ImpEditEngine::SetVertL2R(bool bVertL2R)
+{
+	if (IsVertL2R() != bVertL2R)
+	{
+		GetEditDoc().SetVertL2R(bVertL2R);
+		bool bUseCharAttribs = bool(aStatus.GetControlWord() & EEControlBits::USECHARATTRIBS);
+		GetEditDoc().CreateDefFont(bUseCharAttribs);
+		if (IsFormatted())
+		{
+			FormatFullDoc();
+			UpdateViews(GetActiveView());
+		}
+	}
+}
+
 void ImpEditEngine::SetFixedCellHeight( bool bUseFixedCellHeight )
 {
     if ( IsFixedCellHeight() != bUseFixedCellHeight )
