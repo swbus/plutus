@@ -651,6 +651,14 @@ void EditTextObjectImpl::SetVertical( bool b )
     }
 }
 
+void EditTextObjectImpl::SetVertL2R(bool b)
+{
+	if (b != bVertL2R)
+	{
+		bVertL2R = b;
+		ClearPortionInfo();
+	}
+}
 
 void EditTextObjectImpl::SetScriptType( SvtScriptType nType )
 {
