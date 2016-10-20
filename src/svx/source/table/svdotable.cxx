@@ -1998,7 +1998,7 @@ bool SdrTableObj::IsVerticalWriting() const
 }
 
 
-void SdrTableObj::SetVerticalWriting(bool bVertical )
+void SdrTableObj::SetVerticalWriting(bool bVertical, bool bVertL2R/* = false*/)
 {
     if( bVertical != IsVerticalWriting() )
     {
