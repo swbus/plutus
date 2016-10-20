@@ -233,7 +233,7 @@ public:
     virtual bool AdjustTextFrameWidthAndHeight() override;
     virtual bool IsAutoGrowHeight() const override;
     virtual bool IsAutoGrowWidth() const override;
-    virtual void SetVerticalWriting( bool bVertical, bool bVertL2R = fasle ) override;
+    virtual void SetVerticalWriting( bool bVertical, bool bVertL2R = false ) override;
     virtual bool BegTextEdit( SdrOutliner& rOutl ) override;
     virtual void TakeTextEditArea(Size* pPaperMin, Size* pPaperMax, Rectangle* pViewInit, Rectangle* pViewMin) const override;
     virtual void EndTextEdit( SdrOutliner& rOutl ) override;
