@@ -1,4 +1,6 @@
+*.log
 backup/
-build/
-build-init-bak/
+build*/
 vsprojs/
+external/*.log
+external/tmp/
