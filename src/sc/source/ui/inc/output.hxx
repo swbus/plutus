@@ -95,6 +95,7 @@ private:
         bool                    mbBreak:1;
         bool                    mbCellIsValue:1;
         bool                    mbAsianVertical:1;
+		bool                    mbVertL2R:1;
         bool                    mbPixelToLogic:1;
         bool                    mbHyphenatorSet:1;
         ScFieldEditEngine*      mpEngine;

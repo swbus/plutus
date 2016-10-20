@@ -922,7 +922,7 @@ void ScGridWindow::DrawContent(OutputDevice &rDevice, const ScTableInfo& rTableI
         rDevice.DrawRect(rDevice.PixelToLogic(aBackground));
 
         // paint the editeng text
-        pEditView->Paint(rDevice.PixelToLogic(Rectangle(Point(nScrX, nScrY), Size(aOutputData.GetScrW(), aOutputData.GetScrH()))), &rDevice);
+        pEditView->Paint(rDevice.PixelToLogic(Rectangle(Point(nScrX, nScrY), Size(aOutputData.GetScrW(), aOutputData.GetScrH()))), &rDevice, 1);
         rDevice.SetMapMode(MAP_PIXEL);
 
         // restore the cursor it was originally visible

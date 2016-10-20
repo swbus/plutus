@@ -1132,7 +1132,7 @@ void ScTextWnd::Paint( vcl::RenderContext& rRenderContext, const Rectangle& rRec
             pView->Invalidate();
             mbInvalidate = false;
         }
-        pEditView->Paint(rRect, &rRenderContext);
+        pEditView->Paint(rRect, &rRenderContext, 1);
     }
 }
 

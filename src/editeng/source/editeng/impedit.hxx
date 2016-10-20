@@ -747,8 +747,9 @@ public:
     void                    FormatDoc();
     void                    FormatFullDoc();
     void                    UpdateViews( EditView* pCurView = nullptr );
-    void                    Paint( ImpEditView* pView, const Rectangle& rRect, OutputDevice* pTargetDevice = nullptr );
-    void                    Paint( OutputDevice* pOutDev, Rectangle aClipRect, Point aStartPos, bool bStripOnly = false, short nOrientation = 0 );
+    void                    Paint( ImpEditView* pView, const Rectangle& rRect, OutputDevice* pTargetDevice = nullptr, short nVertMode = 0 );
+    void                    Paint( OutputDevice* pOutDev, Rectangle aClipRect, Point aStartPos, bool bStripOnly = false, short nOrientation = 0, short nVertMode = 0 );
+    void                    PaintVertL2R( OutputDevice* pOutDev, Rectangle aClipRect, Point aStartPos, bool bStripOnly = false, short nOrientation = 0, short nVertMode = 0 );
 
     bool                MouseButtonUp( const MouseEvent& rMouseEvent, EditView* pView );
     bool                MouseButtonDown( const MouseEvent& rMouseEvent, EditView* pView );

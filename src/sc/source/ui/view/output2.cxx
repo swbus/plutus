@@ -2345,7 +2345,7 @@ ScOutputData::DrawEditParam::DrawEditParam(const ScPatternAttr* pPattern, const 
     mnPosX(0), mnPosY(0), mnInitPosX(0),
     mbBreak( (meHorJustAttr == SVX_HOR_JUSTIFY_BLOCK) || lcl_GetBoolValue(*pPattern, ATTR_LINEBREAK, pCondSet) ),
     mbCellIsValue(bCellIsValue),
-    mbAsianVertical(false),
+	mbAsianVertical(false), mbVertL2R(false),
     mbPixelToLogic(false),
     mbHyphenatorSet(false),
     mpEngine(nullptr),
@@ -2693,6 +2693,8 @@ void ScOutputData::DrawEditParam::setAlignmentToEngine()
         if (pData)
             const_cast<EditTextObject*>(pData)->SetVertical(mbAsianVertical);
     }
+
+	mpEngine->SetVertL2R(mbVertL2R);
 }
 
 bool ScOutputData::DrawEditParam::adjustHorAlignment(ScFieldEditEngine* pEngine)
@@ -3804,6 +3806,8 @@ void ScOutputData::DrawEditStacked(DrawEditParam& rParam)
 
     rParam.mbAsianVertical =
         lcl_GetBoolValue(*rParam.mpPattern, ATTR_VERTICAL_ASIAN, rParam.mpCondSet);
+	rParam.mbVertL2R = rParam.mbAsianVertical && 
+		lcl_GetBoolValue(*rParam.mpPattern, ATTR_VERTICAL_ASIAN_EX, rParam.mpCondSet);
 
     if ( rParam.mbAsianVertical )
     {
@@ -4162,7 +4166,7 @@ void ScOutputData::DrawEditAsianVertical(DrawEditParam& rParam)
      * SVX_HOR_JUSTIFY_RIGHT really wanted? Seems this was done all the time,
      * also before context was introduced and everything was attr only. */
     if ( rParam.meHorJustAttr == SVX_HOR_JUSTIFY_STANDARD )
-        rParam.meHorJustResult = rParam.meHorJustContext = SVX_HOR_JUSTIFY_RIGHT;
+		rParam.meHorJustResult = rParam.meHorJustContext = (rParam.mbVertL2R) ? SVX_HOR_JUSTIFY_LEFT : SVX_HOR_JUSTIFY_RIGHT;
 
     if (bHidden)
         return;

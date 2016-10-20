@@ -2626,12 +2626,15 @@ void ScFormatShell::ExecuteTextDirection( SfxRequest& rReq )
     {
         case SID_TEXTDIRECTION_LEFT_TO_RIGHT:
         case SID_TEXTDIRECTION_TOP_TO_BOTTOM:
+        case SID_TEXTDIRECTION_TOP_TO_BOTTOML2R:
         {
-            bool bVert = (nSlot == SID_TEXTDIRECTION_TOP_TO_BOTTOM);
+			bool bVert = ( nSlot == SID_TEXTDIRECTION_TOP_TO_BOTTOM || nSlot == SID_TEXTDIRECTION_TOP_TO_BOTTOML2R );
+			bool bVertL2R = ( nSlot == SID_TEXTDIRECTION_TOP_TO_BOTTOML2R );
             ScPatternAttr aAttr( GetViewData()->GetDocument()->GetPool() );
             SfxItemSet& rItemSet = aAttr.GetItemSet();
             rItemSet.Put( SfxBoolItem( ATTR_STACKED, bVert ) );
             rItemSet.Put( SfxBoolItem( ATTR_VERTICAL_ASIAN, bVert ) );
+            rItemSet.Put( SfxBoolItem( ATTR_VERTICAL_ASIAN_EX, bVertL2R ) );
             pTabViewShell->ApplySelectionPattern( aAttr );
             pTabViewShell->AdjustBlockHeight();
         }
@@ -2662,6 +2665,8 @@ void ScFormatShell::GetTextDirectionState( SfxItemSet& rSet )
         !static_cast<const SfxBoolItem&>(rAttrSet.Get( ATTR_STACKED )).GetValue();
     bool bTopBottom = !bVertDontCare && !bLeftRight &&
         static_cast<const SfxBoolItem&>(rAttrSet.Get( ATTR_VERTICAL_ASIAN )).GetValue();
+	bool bVertL2R = !bVertDontCare && bTopBottom &&
+        static_cast<const SfxBoolItem&>(rAttrSet.Get( ATTR_VERTICAL_ASIAN_EX )).GetValue();
 
     bool bBidiDontCare = (rAttrSet.GetItemState( ATTR_WRITINGDIR ) == SfxItemState::DONTCARE);
     EEHorizontalTextDirection eBidiDir = EE_HTEXTDIR_DEFAULT;
@@ -2690,6 +2695,7 @@ void ScFormatShell::GetTextDirectionState( SfxItemSet& rSet )
         {
             case SID_TEXTDIRECTION_LEFT_TO_RIGHT:
             case SID_TEXTDIRECTION_TOP_TO_BOTTOM:
+			case SID_TEXTDIRECTION_TOP_TO_BOTTOML2R:
                 if ( bDisableVerticalText )
                     rSet.DisableItem( nWhich );
                 else
@@ -2697,9 +2703,23 @@ void ScFormatShell::GetTextDirectionState( SfxItemSet& rSet )
                     if( bVertDontCare )
                         rSet.InvalidateItem( nWhich );
                     else if ( nWhich == SID_TEXTDIRECTION_LEFT_TO_RIGHT )
+					{
                         rSet.Put( SfxBoolItem( nWhich, bLeftRight ) );
-                    else
-                        rSet.Put( SfxBoolItem( nWhich, bTopBottom ) );
+						rSet.Put( SfxBoolItem( SID_TEXTDIRECTION_TOP_TO_BOTTOML2R, bTopBottom && bVertL2R ) );
+						rSet.InvalidateItem( SID_TEXTDIRECTION_TOP_TO_BOTTOML2R );
+					}
+					else if ( nWhich == SID_TEXTDIRECTION_TOP_TO_BOTTOM )
+					{
+						rSet.Put( SfxBoolItem( nWhich, bTopBottom && !bVertL2R ) ); 
+						rSet.Put( SfxBoolItem( SID_TEXTDIRECTION_TOP_TO_BOTTOML2R, bTopBottom && bVertL2R ) );
+						rSet.InvalidateItem( SID_TEXTDIRECTION_TOP_TO_BOTTOML2R );
+					}
+					else if ( nWhich == SID_TEXTDIRECTION_TOP_TO_BOTTOML2R )
+					{
+                        rSet.Put( SfxBoolItem( nWhich, bVertL2R ) ); 
+						rSet.Put( SfxBoolItem( SID_TEXTDIRECTION_TOP_TO_BOTTOM, false ) );
+						rSet.InvalidateItem( SID_TEXTDIRECTION_TOP_TO_BOTTOML2R );
+					}
                 }
             break;
 

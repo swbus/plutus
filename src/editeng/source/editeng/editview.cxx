@@ -270,9 +270,9 @@ void EditView::GetSelectionRectangles(std::vector<Rectangle>& rLogicRects) const
     return pImpEditView->GetSelectionRectangles(rLogicRects);
 }
 
-void EditView::Paint( const Rectangle& rRect, OutputDevice* pTargetDevice )
+void EditView::Paint( const Rectangle& rRect, OutputDevice* pTargetDevice, short nVertMode/* = 0*/ )
 {
-    pImpEditView->pEditEngine->pImpEditEngine->Paint( pImpEditView, rRect, pTargetDevice );
+    pImpEditView->pEditEngine->pImpEditEngine->Paint( pImpEditView, rRect, pTargetDevice, nVertMode );
 }
 
 void EditView::SetEditEngine( EditEngine* pEditEng )

@@ -1976,6 +1976,11 @@ void ScInputHandler::UpdateAdjust( sal_Unicode cTyped )
     nEditAdjust = sal::static_int_cast<sal_uInt16>(eSvxAdjust); //! set at ViewData or with PostEditView
 
     pEngine->SetVertical( bAsianVertical );
+
+	bool bVertL2R = pLastPattern &&
+		static_cast<const SfxBoolItem&>( pLastPattern->GetItem( ATTR_STACKED ) ).GetValue() &&
+		static_cast<const SfxBoolItem&>( pLastPattern->GetItem( ATTR_VERTICAL_ASIAN_EX ) ).GetValue();
+	pEngine->SetVertL2R( bAsianVertical && bVertL2R );
 }
 
 void ScInputHandler::RemoveAdjust()

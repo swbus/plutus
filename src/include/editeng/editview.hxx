@@ -106,7 +106,7 @@ public:
     void            SetWindow( vcl::Window* pWin );
     vcl::Window*         GetWindow() const;
 
-    void            Paint( const Rectangle& rRect, OutputDevice* pTargetDevice = nullptr );
+    void            Paint( const Rectangle& rRect, OutputDevice* pTargetDevice = nullptr, short nVertMode = 0 );
     void            Invalidate();
     Pair            Scroll( long nHorzScroll, long nVertScroll, ScrollRangeCheck nRangeCheck = ScrollRangeCheck::NoNegative );
 
