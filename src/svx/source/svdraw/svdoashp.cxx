@@ -2233,7 +2233,7 @@ bool SdrObjCustomShape::IsAutoGrowWidth() const
    is that the SdrAutoGrowWidthItem and SdrAutoGrowHeightItem are not exchanged if the vertical writing
    mode has been changed */
 
-void SdrObjCustomShape::SetVerticalWriting( bool bVertical )
+void SdrObjCustomShape::SetVerticalWriting( bool bVertical, bool bVertL2R/* = false*/ )
 {
     ForceOutlinerParaObject();
 

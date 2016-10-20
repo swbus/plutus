@@ -536,6 +536,16 @@ bool Outliner::IsVertical() const
     return pEditEngine->IsVertical();
 }
 
+void Outliner::SetVertL2R(bool b)
+{
+	pEditEngine->SetVertL2R(b);
+}
+
+bool Outliner::IsVertL2R() const
+{
+	return pEditEngine->IsVertL2R();
+}
+
 void Outliner::SetFixedCellHeight( bool bUseFixedCellHeight )
 {
     pEditEngine->SetFixedCellHeight( bUseFixedCellHeight );

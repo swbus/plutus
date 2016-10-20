@@ -546,7 +546,7 @@ public:
     void UpdateOutlinerFormatting( SdrOutliner& rOutl, Rectangle& rPaintRect ) const;
     void ForceOutlinerParaObject();
     virtual bool IsVerticalWriting() const;
-    virtual void SetVerticalWriting(bool bVertical);
+    virtual void SetVerticalWriting( bool bVertical, bool bVertL2R = false );
 
     /** called from the SdrObjEditView during text edit when the status of the edit outliner changes */
     virtual void onEditOutlinerStatusEvent( EditStatus* pEditStatus );

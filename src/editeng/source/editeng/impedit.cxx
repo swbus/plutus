@@ -440,10 +440,14 @@ void ImpEditView::ImplDrawHighlightRect( OutputDevice* _pTarget, const Point& rD
     }
 }
 
-
 bool ImpEditView::IsVertical() const
 {
     return pEditEngine->pImpEditEngine->IsVertical();
+}
+
+bool ImpEditView::IsVertL2R() const
+{
+	return pEditEngine->pImpEditEngine->IsVertL2R();
 }
 
 Rectangle ImpEditView::GetVisDocArea() const

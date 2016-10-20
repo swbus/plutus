@@ -1963,7 +1963,7 @@ EditDoc::EditDoc( SfxItemPool* pPool ) :
     nLastCache(0),
     pItemPool(pPool ? pPool : new EditEngineItemPool(false)),
     nDefTab(DEFTAB),
-    bIsVertical(false),
+    bIsVertical(false), bIsVertL2R(false),
     bIsFixedCellHeight(false),
     bOwnerOfPool(pPool == nullptr),
     bModified(false)

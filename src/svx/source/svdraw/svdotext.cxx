@@ -1558,7 +1558,7 @@ bool SdrTextObj::IsVerticalWriting() const
     return false;
 }
 
-void SdrTextObj::SetVerticalWriting(bool bVertical)
+void SdrTextObj::SetVerticalWriting(bool bVertical, bool bVertL2R/* = false*/)
 {
     OutlinerParaObject* pOutlinerParaObject = GetOutlinerParaObject();
     if( !pOutlinerParaObject && bVertical )

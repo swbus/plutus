@@ -177,6 +177,7 @@ private:
 
     bool                    bOwnerOfPool:1;
     bool                    bVertical:1;
+    bool                    bVertL2R:1;
     bool                    bStoreUnicodeStrings:1;
 
     bool ImpChangeStyleSheets( const OUString& rOldName, SfxStyleFamily eOldFamily,
@@ -201,6 +202,9 @@ public:
 
     bool                    IsVertical() const { return bVertical;}
     void                    SetVertical( bool b );
+
+    bool                    IsVertL2R() const { return bVertical && bVertL2R; }
+    void                    SetVertL2R(bool b);
 
     SvtScriptType           GetScriptType() const { return nScriptType;}
     void                    SetScriptType( SvtScriptType nType );

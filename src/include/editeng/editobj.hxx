@@ -92,6 +92,9 @@ public:
     bool IsVertical() const;
     void SetVertical( bool bVertical );
 
+    bool IsVertL2R() const;
+    void SetVertL2R(bool bVertical);
+
     SvtScriptType GetScriptType() const;
 
     EditTextObject* Clone() const;

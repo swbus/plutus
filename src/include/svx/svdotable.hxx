@@ -246,7 +246,7 @@ public:
     virtual void ReformatText() override;
 
     virtual bool IsVerticalWriting() const override;
-    virtual void SetVerticalWriting(bool bVertical) override;
+    virtual void SetVerticalWriting( bool bVertical, bool bVertL2R = false ) override;
 
     css::text::WritingMode GetWritingMode() const;
 

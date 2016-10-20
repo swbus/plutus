@@ -438,6 +438,16 @@ bool EditEngine::IsVertical() const
     return pImpEditEngine->IsVertical();
 }
 
+void EditEngine::SetVertL2R(bool bVertL2R)
+{
+	pImpEditEngine->SetVertL2R(bVertL2R);
+}
+
+bool EditEngine::IsVertL2R() const
+{
+	return pImpEditEngine->IsVertL2R();
+}
+
 void EditEngine::SetFixedCellHeight( bool bUseFixedCellHeight )
 {
     pImpEditEngine->SetFixedCellHeight( bUseFixedCellHeight );

@@ -82,6 +82,10 @@ public:
     bool IsVertical() const;
     void SetVertical(bool bNew);
 
+    // vertical left to right access
+    bool IsVertL2R() const;
+    void SetVertL2R(bool bNew);
+
     // data read access
     sal_Int32 Count() const;
     sal_Int16 GetDepth(sal_Int32 nPara) const;

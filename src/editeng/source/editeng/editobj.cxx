@@ -346,6 +346,15 @@ SvtScriptType EditTextObject::GetScriptType() const
     return mpImpl->GetScriptType();
 }
 
+bool EditTextObject::IsVertL2R() const
+{
+	return mpImpl->IsVertL2R();
+}
+
+void EditTextObject::SetVertL2R(bool bVertical)
+{
+	return mpImpl->SetVertL2R(bVertical);
+}
 
 void EditTextObject::Store( SvStream& rOStream ) const
 {

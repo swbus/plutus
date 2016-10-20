@@ -240,6 +240,9 @@ public:
     void            SetVertical( bool bVertical );
     bool            IsVertical() const;
 
+    void            SetVertL2R(bool bVertL2R);
+    bool            IsVertL2R() const;
+
     void            SetFixedCellHeight( bool bUseFixedCellHeight );
 
     void                        SetDefaultHorizontalTextDirection( EEHorizontalTextDirection eHTextDir );

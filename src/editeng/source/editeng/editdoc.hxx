@@ -735,6 +735,7 @@ private:
     SvxFont         aDefFont;           //faster than ever from the pool!!
     sal_uInt16      nDefTab;
     bool            bIsVertical:1;
+    bool            bIsVertL2R:1;
     bool            bIsFixedCellHeight:1;
 
     bool            bOwnerOfPool:1;
@@ -762,6 +763,9 @@ public:
 
     void            SetVertical( bool bVertical )   { bIsVertical = bVertical; }
     bool            IsVertical() const              { return bIsVertical; }
+
+    void            SetVertL2R(bool bVertL2R)      { bIsVertL2R = bVertL2R; }
+    bool            IsVertL2R() const              { return bIsVertical && bIsVertL2R; }
 
     void            SetFixedCellHeight( bool bUseFixedCellHeight )  { bIsFixedCellHeight = bUseFixedCellHeight; }
     bool            IsFixedCellHeight() const               { return bIsFixedCellHeight; }

@@ -145,6 +145,7 @@ static SfxItemInfo const  aItemInfos[] =
     { 0,                            true },    // ATTR_VALIDDATA
     { 0,                            true },    // ATTR_CONDITIONAL
     { 0,                            true },    // ATTR_HYPERLINK
+	{ ATTR_VERTICAL_ASIAN_EX,		true },    // ATTR_VERTICAL_ASIAN_EX
     { 0,                            true },    // ATTR_PATTERN
     { SID_ATTR_LRSPACE,             true },    // ATTR_LRSPACE
     { SID_ATTR_ULSPACE,             true },    // ATTR_ULSPACE
@@ -285,7 +286,7 @@ ScDocumentPool::ScDocumentPool( SfxItemPool* pSecPool)
     ppPoolDefaults[ ATTR_VALIDDATA       - ATTR_STARTINDEX ] = new SfxUInt32Item( ATTR_VALIDDATA, 0 );
     ppPoolDefaults[ ATTR_CONDITIONAL     - ATTR_STARTINDEX ] = new ScCondFormatItem;
     ppPoolDefaults[ ATTR_HYPERLINK       - ATTR_STARTINDEX ] = new SfxStringItem( ATTR_HYPERLINK, OUString() ) ;
-
+	ppPoolDefaults[ ATTR_VERTICAL_ASIAN_EX - ATTR_STARTINDEX ] = new SfxBoolItem( ATTR_VERTICAL_ASIAN_EX );
     // GetRscString only works after ScGlobal::Init (indicated by the EmptyBrushItem)
     // TODO: Write additional method ScGlobal::IsInit() or somesuch
     //       or detect whether this is the Secondary Pool for a MessagePool

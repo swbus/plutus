@@ -140,6 +140,20 @@ void OutlinerParaObject::SetVertical(bool bNew)
     }
 }
 
+bool OutlinerParaObject::IsVertL2R() const
+{
+    return mpImpl->mpEditTextObject->IsVertL2R();
+}
+
+void OutlinerParaObject::SetVertL2R(bool bNew)
+{
+    const ::o3tl::cow_wrapper< OutlinerParaObjData >* pImpl = &mpImpl;
+	if ((*pImpl)->mpEditTextObject->IsVertL2R() != bNew)
+    {
+        mpImpl->mpEditTextObject->SetVertL2R(bNew);
+    }
+}
+
 sal_Int32 OutlinerParaObject::Count() const
 {
     size_t nSize = mpImpl->maParagraphDataVector.size();
