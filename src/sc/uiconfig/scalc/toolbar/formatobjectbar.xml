@@ -76,6 +76,6 @@
  <toolbar:toolbaritem xlink:href=".uno:ParaRightToLeft"/>
  <toolbar:toolbarseparator/>
  <toolbar:toolbaritem xlink:href=".uno:TextdirectionLeftToRight"/>
- <toolbar:toolbaritem xlink:href=".uno:TextdirectionLeftToRightL2R"/>
+ <toolbar:toolbaritem xlink:href=".uno:TextdirectionTopToBottomL2R"/>
  <toolbar:toolbaritem xlink:href=".uno:TextdirectionTopToBottom"/>
 </toolbar:toolbar>
