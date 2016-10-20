@@ -120,7 +120,7 @@
 #define SID_ATTR_CHAR_LATIN_WEIGHT                      ( SID_SVX_START + 998 )
 #define SID_ATTR_CHAR_GRABBAG                           ( SID_SVX_START + 1142 )
 #define SID_ATTR_CHAR_BACK_COLOR                        ( SID_SVX_START + 1153 )
-
+#define SID_ATTR_CHAR_VERTICALL2R                       ( SID_SVX_START + 6102 )
 // these ID didn't exist prior to the svx split, add new ids here
 #define SID_ATTR_CHAR_OVERLINE                          ( SID_EDIT_START + 68 )
 #define SID_ATTR_ALIGN_HOR_JUSTIFY_METHOD               ( SID_EDIT_START + 69 )

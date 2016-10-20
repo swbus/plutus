@@ -63,6 +63,7 @@
  <toolbar:toolbaritem xlink:href=".uno:InsertObjectChart"/>
  <toolbar:toolbarseparator/>
  <toolbar:toolbaritem xlink:href=".uno:Text"/>
+ <toolbar:toolbaritem xlink:href=".uno:VerticalTextL2R"/>
  <toolbar:toolbaritem xlink:href=".uno:VerticalText" toolbar:visible="false"/>
  <toolbar:toolbaritem xlink:href=".uno:FontworkGalleryFloater"/>
  <toolbar:toolbaritem xlink:href=".uno:HyperlinkDialog"/>

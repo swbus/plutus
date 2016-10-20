@@ -152,6 +152,11 @@ interface TextEditView : BaseTextEditView
         ExecMethod = ExecDraw ;
         StateMethod = GetDrawState ;
     ]
+    SID_DRAW_TEXT_VERTICALL2R
+    [
+        ExecMethod = ExecDraw ;
+        StateMethod = GetDrawState ;
+    ]
     SID_DRAW_TEXT_VERTICAL
     [
         ExecMethod = ExecDraw ;

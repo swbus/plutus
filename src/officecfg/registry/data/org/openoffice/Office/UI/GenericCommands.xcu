@@ -2299,6 +2299,14 @@
           <value>1</value>
         </prop>
       </node>
+      <node oor:name=".uno:VerticalTextL2R" oor:op="replace">
+        <prop oor:name="Label" oor:type="xs:string">
+          <value xml:lang="en-US">Vertical Text(left to right)</value>
+        </prop>
+        <prop oor:name="Properties" oor:type="xs:int">
+          <value>1</value>
+        </prop>
+      </node>
       <node oor:name=".uno:VerticalText" oor:op="replace">
         <prop oor:name="Label" oor:type="xs:string">
           <value xml:lang="en-US">Vertical Text</value>
@@ -2318,6 +2326,14 @@
       <node oor:name=".uno:TextdirectionLeftToRight" oor:op="replace">
         <prop oor:name="Label" oor:type="xs:string">
           <value xml:lang="en-US">Text direction from left to right</value>
+        </prop>
+        <prop oor:name="Properties" oor:type="xs:int">
+          <value>1</value>
+        </prop>
+      </node>
+      <node oor:name=".uno:TextdirectionTopToBottomL2R" oor:op="replace">
+        <prop oor:name="Label" oor:type="xs:string">
+          <value xml:lang="en-US">Text direction from top to bottom(left to right)</value>
         </prop>
         <prop oor:name="Properties" oor:type="xs:int">
           <value>1</value>

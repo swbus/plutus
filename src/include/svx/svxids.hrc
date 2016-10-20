@@ -755,7 +755,7 @@
 #define SID_ATTR_GRAF_FRMSIZE_PERCENT                   ( SID_SVX_START + 885 )
 #define SID_ATTR_GRAF_GRAPHIC                           ( SID_SVX_START + 886 )
 #define SID_DRAW_TEXT_VERTICAL                              SID_ATTR_CHAR_VERTICAL
-
+#define SID_DRAW_TEXT_VERTICALL2R                       SID_ATTR_CHAR_VERTICALL2R
 // CAUTION! Range <887 .. 903> used by EditEngine (!)
 
 // CAUTION! Range <905 .. 905> used by EditEngine (!)
@@ -763,7 +763,7 @@
 #define SID_DRAW_CAPTION_VERTICAL                       ( SID_SVX_START + 906 )
 #define SID_TEXTDIRECTION_LEFT_TO_RIGHT                 ( SID_SVX_START + 907 )
 #define SID_TEXTDIRECTION_TOP_TO_BOTTOM                 ( SID_SVX_START + 908 )
-
+#define SID_TEXTDIRECTION_TOP_TO_BOTTOML2R              ( SID_SVX_START + 909 )
 // CAUTION! Range <910 .. 911> used by EditEngine (!)
 
 #define SID_TRANSLITERATE_UPPER                         ( SID_SVX_START + 912 )
