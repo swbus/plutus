@@ -291,6 +291,7 @@ public:
     const Rectangle&    GetOutputArea() const   { return aOutArea; }
 
     bool            IsVertical() const;
+    bool            IsVertL2R() const;
 
     bool            PostKeyEvent( const KeyEvent& rKeyEvent, vcl::Window* pFrameWin = nullptr );
 
@@ -716,6 +717,9 @@ public:
 
     void                    SetVertical( bool bVertical );
     bool                    IsVertical() const                      { return GetEditDoc().IsVertical(); }
+
+    void                    SetVertL2R( bool bVertical );
+    bool                    IsVertL2R() const                       { return GetEditDoc().IsVertL2R(); }
 
     bool IsPageOverflow( ) const;
 
