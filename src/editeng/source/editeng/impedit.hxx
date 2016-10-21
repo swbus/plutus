@@ -285,6 +285,8 @@ public:
     Point           GetDocPos( const Point& rWindowPos ) const;
     Point           GetWindowPos( const Point& rDocPos ) const;
     Rectangle       GetWindowPos( const Rectangle& rDocPos ) const;
+	Point           GetWindowPosEx( const Point& rDocPos ) const;
+	Rectangle       GetWindowPosEx( const Rectangle& rDocPos ) const;
 
     void                SetOutputArea( const Rectangle& rRect );
     void                ResetOutputArea( const Rectangle& rRect );

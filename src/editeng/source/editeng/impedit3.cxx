@@ -3702,6 +3702,817 @@ void ImpEditEngine::Paint( OutputDevice* pOutDev, Rectangle aClipRect, Point aSt
 
 void ImpEditEngine::PaintVertL2R(OutputDevice* pOutDev, Rectangle aClipRect, Point aStartPos, bool bStripOnly, short nOrientation, short nVertMode/* = 0*/)
 {
+	if (!GetUpdateMode() && !bStripOnly)
+		return;
+
+	if (!IsFormatted())
+		FormatDoc();
+
+	long nFirstVisXPos = -pOutDev->GetMapMode().GetOrigin().X();
+	long nFirstVisYPos = -pOutDev->GetMapMode().GetOrigin().Y();
+
+	const EditLine* pLine = nullptr;
+	Point aTmpPos;
+	Point aRedLineTmpPos;
+	DBG_ASSERT(GetParaPortions().Count(), "No ParaPortion?!");
+	SvxFont aTmpFont(GetParaPortions()[0]->GetNode()->GetCharAttribs().GetDefFont());
+	vcl::Font aOldFont(pOutDev->GetFont());
+	vcl::PDFExtOutDevData* pPDFExtOutDevData = dynamic_cast<vcl::PDFExtOutDevData*>(pOutDev->GetExtOutDevData());
+
+	// In the case of rotated text is aStartPos considered TopLeft because
+	// other information is missing, and since the whole object is shown anyway
+	// un-scrolled.
+	// The rectangle is infinite.
+	Point aOrigin(aStartPos);
+	double nCos = 0.0, nSin = 0.0;
+	if (nOrientation)
+	{
+		double nRealOrientation = nOrientation*F_PI1800;
+		nCos = cos(nRealOrientation);
+		nSin = sin(nRealOrientation);
+	}
+
+	// #110496# Added some more optional metafile comments. This
+	// change: factored out some duplicated code.
+	GDIMetaFile* pMtf = pOutDev->GetConnectMetaFile();
+	const bool bMetafileValid(pMtf != nullptr);
+
+	long nVertLineSpacing = CalcVertLineSpacing(aStartPos);
+
+
+	// Over all the paragraphs ...
+	sal_Int32 nNumOfParaPortions = GetParaPortions().Count();
+
+	for (sal_Int32 n = nNumOfParaPortions - 1; n >= 0; n --)
+	{
+		const ParaPortion* pPortion = GetParaPortions()[n];
+		DBG_ASSERT(pPortion, "NULL-Pointer in TokenList in Paint");
+		// if when typing idle formatting,  asynchronous Paint.
+		// Invisible Portions may be invalid.
+		if (pPortion->IsVisible() && pPortion->IsInvalid())
+			return;
+
+		if (pPDFExtOutDevData)
+			pPDFExtOutDevData->BeginStructureElement(vcl::PDFWriter::Paragraph);
+
+		long nParaHeight = pPortion->GetHeight();
+		sal_Int32 nIndex = 0;
+		if (pPortion->IsVisible() && (
+			(!IsVertical() && ((aStartPos.Y() + nParaHeight) > aClipRect.Top())) ||
+			(IsVertical() && ((aStartPos.X() - nParaHeight) < aClipRect.Right()))))
+
+		{
+
+			// Over the lines of the paragraph ...
+
+			sal_Int32 nLines = pPortion->GetLines().Count();
+			sal_Int32 nLastLine = nLines - 1;
+
+			bool bEndOfParagraphWritten(false);
+
+			if (!IsVertical())
+				aStartPos.Y() += pPortion->GetFirstLineOffset();
+			else
+				aStartPos.X() -= pPortion->GetFirstLineOffset();
+
+			Point aParaStart(aStartPos);
+
+			const SvxLineSpacingItem& rLSItem = static_cast<const SvxLineSpacingItem&>(pPortion->GetNode()->GetContentAttribs().GetItem(EE_PARA_SBL));
+			sal_uInt16 nSBL = (rLSItem.GetInterLineSpaceRule() == SVX_INTER_LINE_SPACE_FIX)
+				? GetYValue(rLSItem.GetInterLineSpace()) : 0;
+			bool bPaintBullet(false);
+
+			for (sal_Int32 nLine = nLines - 1; nLine >= 0; nLine --)
+			{
+				pLine = &pPortion->GetLines()[nLine];
+				nIndex = pLine->GetStart();
+				DBG_ASSERT(pLine, "NULL-Pointer in the line iterator in UpdateViews");
+				aTmpPos = aStartPos;
+				if (!IsVertical())
+				{
+					aTmpPos.X() += pLine->GetStartPosX();
+					aTmpPos.Y() += pLine->GetMaxAscent();
+					aStartPos.Y() += pLine->GetHeight();
+					if (nLine != nLastLine)
+						aStartPos.Y() += nVertLineSpacing;
+				}
+				else
+				{
+					aTmpPos.Y() += pLine->GetStartPosX();
+					aTmpPos.X() -= pLine->GetMaxAscent();
+					aStartPos.X() -= pLine->GetHeight();
+					if (nLine != nLastLine)
+						aStartPos.X() -= nVertLineSpacing;
+				}
+
+				if ((!IsVertical() && (aStartPos.Y() > aClipRect.Top()))
+					|| (IsVertical() && aStartPos.X() < aClipRect.Right()))
+				{
+					bPaintBullet = false;
+
+					// Why not just also call when stripping portions? This will give the correct values
+					// and needs no position corrections in OutlinerEditEng::DrawingText which tries to call
+					// PaintBullet correctly; exactly what GetEditEnginePtr()->PaintingFirstLine
+					// does, too. No change for not-layouting (painting).
+					if (0 == nLine) // && !bStripOnly)
+					{
+						GetEditEnginePtr()->PaintingFirstLine(n, aParaStart, aTmpPos.Y(), aOrigin, nOrientation, pOutDev);
+
+						// Remember whether a bullet was painted.
+						const SfxBoolItem& rBulletState = static_cast<const SfxBoolItem&>(
+							pEditEngine->GetParaAttrib(n, EE_PARA_BULLETSTATE));
+						bPaintBullet = rBulletState.GetValue();
+					}
+
+
+					// Over the Portions of the line ...
+
+					bool bParsingFields = false;
+					::std::vector< sal_Int32 >::iterator itSubLines;
+
+					for (sal_Int32 nPortion = pLine->GetStartPortion(); nPortion <= pLine->GetEndPortion(); nPortion++)
+					{
+						DBG_ASSERT(pPortion->GetTextPortions().Count(), "Line without Textportion in Paint!");
+						const TextPortion& rTextPortion = pPortion->GetTextPortions()[nPortion];
+
+						long nPortionXOffset = GetPortionXOffset(pPortion, pLine, nPortion);
+						if (!IsVertical())
+						{
+							aTmpPos.X() = aStartPos.X() + nPortionXOffset;
+							if (aTmpPos.X() > aClipRect.Right())
+								break;  // No further output in line necessary
+						}
+						else
+						{
+							aTmpPos.Y() = aStartPos.Y() + nPortionXOffset;
+							if (aTmpPos.Y() > aClipRect.Bottom())
+								break;  // No further output in line necessary
+						}
+
+						switch (rTextPortion.GetKind())
+						{
+						case PortionKind::TEXT:
+						case PortionKind::FIELD:
+						case PortionKind::HYPHENATOR:
+						{
+							SeekCursor(pPortion->GetNode(), nIndex + 1, aTmpFont, pOutDev);
+
+							bool bDrawFrame = false;
+
+							if ((rTextPortion.GetKind() == PortionKind::FIELD) && !aTmpFont.IsTransparent() &&
+								(GetBackgroundColor() != COL_AUTO) && GetBackgroundColor().IsDark() &&
+								(IsAutoColorEnabled() && (pOutDev->GetOutDevType() != OUTDEV_PRINTER)))
+							{
+								aTmpFont.SetTransparent(true);
+								pOutDev->SetFillColor();
+								pOutDev->SetLineColor(GetAutoColor());
+								bDrawFrame = true;
+							}
+
+#if OSL_DEBUG_LEVEL > 2
+							if (rTextPortion.GetKind() == PORTIONKIND_HYPHENATOR)
+							{
+								aTmpFont.SetFillColor(COL_LIGHTGRAY);
+								aTmpFont.SetTransparent(sal_False);
+							}
+							if (rTextPortion.GetRightToLeft())
+							{
+								aTmpFont.SetFillColor(COL_LIGHTGRAY);
+								aTmpFont.SetTransparent(sal_False);
+							}
+							else if (GetI18NScriptType(EditPaM(pPortion->GetNode(), nIndex + 1)) == i18n::ScriptType::COMPLEX)
+							{
+								aTmpFont.SetFillColor(COL_LIGHTCYAN);
+								aTmpFont.SetTransparent(sal_False);
+							}
+#endif
+							aTmpFont.SetPhysFont(pOutDev);
+
+							// #114278# Saving both layout mode and language (since I'm
+							// potentially changing both)
+							pOutDev->Push(PushFlags::TEXTLAYOUTMODE | PushFlags::TEXTLANGUAGE);
+							ImplInitLayoutMode(pOutDev, n, nIndex);
+							ImplInitDigitMode(pOutDev, aTmpFont.GetLanguage());
+
+							OUString aText;
+							sal_Int32 nTextStart = 0;
+							sal_Int32 nTextLen = 0;
+							const long* pDXArray = nullptr;
+							std::unique_ptr<long[]> pTmpDXArray;
+
+							if (rTextPortion.GetKind() == PortionKind::TEXT)
+							{
+								aText = pPortion->GetNode()->GetString();
+								nTextStart = nIndex;
+								nTextLen = rTextPortion.GetLen();
+								if (!pLine->GetCharPosArray().empty())
+									pDXArray = &pLine->GetCharPosArray()[0] + (nIndex - pLine->GetStart());
+
+								// Paint control characters (#i55716#)
+								if (aStatus.MarkFields())
+								{
+									sal_Int32 nTmpIdx;
+									const sal_Int32 nTmpEnd = nTextStart + rTextPortion.GetLen();
+
+									for (nTmpIdx = nTextStart; nTmpIdx <= nTmpEnd; ++nTmpIdx)
+									{
+										const sal_Unicode cChar = (nTmpIdx != aText.getLength() && (nTmpIdx != nTextStart || 0 == nTextStart)) ?
+											aText[nTmpIdx] :
+											0;
+
+										if (0x200B == cChar || 0x2060 == cChar)
+										{
+											const OUString aBlank(' ');
+											long nHalfBlankWidth = aTmpFont.QuickGetTextSize(pOutDev, aBlank, 0, 1).Width() / 2;
+
+											const long nAdvanceX = (nTmpIdx == nTmpEnd ?
+												rTextPortion.GetSize().Width() :
+												pDXArray[nTmpIdx - nTextStart]) - nHalfBlankWidth;
+											const long nAdvanceY = -pLine->GetMaxAscent();
+
+											Point aTopLeftRectPos(aTmpPos);
+											if (!IsVertical())
+											{
+												aTopLeftRectPos.X() += nAdvanceX;
+												aTopLeftRectPos.Y() += nAdvanceY;
+											}
+											else
+											{
+												aTopLeftRectPos.Y() += nAdvanceX;
+												aTopLeftRectPos.X() -= nAdvanceY;
+											}
+
+											Point aBottomRightRectPos(aTopLeftRectPos);
+											if (!IsVertical())
+											{
+												aBottomRightRectPos.X() += 2 * nHalfBlankWidth;
+												aBottomRightRectPos.Y() += pLine->GetHeight();
+											}
+											else
+											{
+												aBottomRightRectPos.X() -= pLine->GetHeight();
+												aBottomRightRectPos.Y() += 2 * nHalfBlankWidth;
+											}
+
+											pOutDev->Push(PushFlags::FILLCOLOR);
+											pOutDev->Push(PushFlags::LINECOLOR);
+											pOutDev->SetFillColor(COL_LIGHTGRAY);
+											pOutDev->SetLineColor(COL_LIGHTGRAY);
+
+											const Rectangle aBackRect(aTopLeftRectPos, aBottomRightRectPos);
+											pOutDev->DrawRect(aBackRect);
+
+											pOutDev->Pop();
+											pOutDev->Pop();
+
+											if (0x200B == cChar)
+											{
+												const OUString aSlash('/');
+												const short nOldEscapement = aTmpFont.GetEscapement();
+												const sal_uInt8 nOldPropr = aTmpFont.GetPropr();
+
+												aTmpFont.SetEscapement(-20);
+												aTmpFont.SetPropr(25);
+												aTmpFont.SetPhysFont(pOutDev);
+
+												const Size aSlashSize = aTmpFont.QuickGetTextSize(pOutDev, aSlash, 0, 1);
+												Point aSlashPos(aTmpPos);
+												const long nAddX = nHalfBlankWidth - aSlashSize.Width() / 2;
+												if (!IsVertical())
+												{
+													aSlashPos.X() = aTopLeftRectPos.X() + nAddX;
+												}
+												else
+												{
+													aSlashPos.Y() = aTopLeftRectPos.Y() + nAddX;
+												}
+
+												aTmpFont.QuickDrawText(pOutDev, aSlashPos, aSlash, 0, 1);
+
+												aTmpFont.SetEscapement(nOldEscapement);
+												aTmpFont.SetPropr(nOldPropr);
+												aTmpFont.SetPhysFont(pOutDev);
+											}
+										}
+									}
+								}
+							}
+							else if (rTextPortion.GetKind() == PortionKind::FIELD)
+							{
+								const EditCharAttrib* pAttr = pPortion->GetNode()->GetCharAttribs().FindFeature(nIndex);
+								DBG_ASSERT(pAttr, "Field not found");
+								DBG_ASSERT(pAttr && dynamic_cast<const SvxFieldItem*>(pAttr->GetItem()) != nullptr, "Field of the wrong type! ");
+								aText = static_cast<const EditCharAttribField*>(pAttr)->GetFieldValue();
+								nTextStart = 0;
+								nTextLen = aText.getLength();
+								ExtraPortionInfo *pExtraInfo = rTextPortion.GetExtraInfos();
+								// Do not split the Fields into different lines while editing
+								if (bStripOnly && !bParsingFields && pExtraInfo && pExtraInfo->lineBreaksList.size())
+								{
+									bParsingFields = true;
+									itSubLines = pExtraInfo->lineBreaksList.begin();
+								}
+								if (bParsingFields)
+								{
+									if (itSubLines != pExtraInfo->lineBreaksList.begin())
+									{
+										if (!IsVertical())
+										{
+											aStartPos.Y() += pLine->GetMaxAscent();
+											aTmpPos.Y() += pLine->GetHeight();
+										}
+										else
+										{
+											aTmpPos.X() -= pLine->GetMaxAscent();
+											aStartPos.X() -= pLine->GetHeight();
+										}
+									}
+									::std::vector< sal_Int32 >::iterator curIt = itSubLines;
+									++itSubLines;
+									if (itSubLines != pExtraInfo->lineBreaksList.end())
+									{
+										nTextStart = *curIt;
+										nTextLen = *itSubLines - nTextStart;
+									}
+									else
+									{
+										nTextStart = *curIt;
+										nTextLen = nTextLen - nTextStart;
+										bParsingFields = false;
+									}
+								}
+
+								pTmpDXArray.reset(new long[aText.getLength()]);
+								pDXArray = pTmpDXArray.get();
+								vcl::Font _aOldFont(GetRefDevice()->GetFont());
+								aTmpFont.SetPhysFont(GetRefDevice());
+								aTmpFont.QuickGetTextSize(GetRefDevice(), aText, nTextStart, nTextLen, pTmpDXArray.get());
+								if (aStatus.DoRestoreFont())
+									GetRefDevice()->SetFont(_aOldFont);
+
+								// add a meta file comment if we record to a metafile
+								if (bMetafileValid)
+								{
+									const SvxFieldItem* pFieldItem = dynamic_cast<const SvxFieldItem*>(pAttr->GetItem());
+									if (pFieldItem)
+									{
+										const SvxFieldData* pFieldData = pFieldItem->GetField();
+										if (pFieldData)
+											pMtf->AddAction(pFieldData->createBeginComment());
+									}
+								}
+
+							}
+							else if (rTextPortion.GetKind() == PortionKind::HYPHENATOR)
+							{
+								if (rTextPortion.GetExtraValue())
+									aText = OUString(rTextPortion.GetExtraValue());
+								aText += OUStringLiteral1<CH_HYPH>();
+								nTextStart = 0;
+								nTextLen = aText.getLength();
+
+								// crash when accessing 0 pointer in pDXArray
+								pTmpDXArray.reset(new long[aText.getLength()]);
+								pDXArray = pTmpDXArray.get();
+								vcl::Font _aOldFont(GetRefDevice()->GetFont());
+								aTmpFont.SetPhysFont(GetRefDevice());
+								aTmpFont.QuickGetTextSize(GetRefDevice(), aText, 0, aText.getLength(), pTmpDXArray.get());
+								if (aStatus.DoRestoreFont())
+									GetRefDevice()->SetFont(_aOldFont);
+							}
+
+							long nTxtWidth = rTextPortion.GetSize().Width();
+
+							Point aOutPos(aTmpPos);
+							aRedLineTmpPos = aTmpPos;
+							// In RTL portions spell markup pos should be at the start of the
+							// first chara as well. That is on the right end of the portion
+							if (rTextPortion.IsRightToLeft())
+								aRedLineTmpPos.X() += rTextPortion.GetSize().Width();
+
+							if (bStripOnly)
+							{
+								EEngineData::WrongSpellVector aWrongSpellVector;
+
+								if (GetStatus().DoOnlineSpelling() && rTextPortion.GetLen())
+								{
+									WrongList* pWrongs = pPortion->GetNode()->GetWrongList();
+
+									if (pWrongs && !pWrongs->empty())
+									{
+										size_t nStart = nIndex, nEnd = 0;
+										bool bWrong = pWrongs->NextWrong(nStart, nEnd);
+										const size_t nMaxEnd(nIndex + rTextPortion.GetLen());
+
+										while (bWrong)
+										{
+											if (nStart >= nMaxEnd)
+											{
+												break;
+											}
+
+											if (nStart < (size_t)nIndex)
+											{
+												nStart = nIndex;
+											}
+
+											if (nEnd > nMaxEnd)
+											{
+												nEnd = nMaxEnd;
+											}
+
+											// add to vector
+											aWrongSpellVector.push_back(EEngineData::WrongSpellClass(nStart, nEnd));
+
+											// goto next index
+											nStart = nEnd + 1;
+
+											if (nEnd < nMaxEnd)
+											{
+												bWrong = pWrongs->NextWrong(nStart, nEnd);
+											}
+											else
+											{
+												bWrong = false;
+											}
+										}
+									}
+								}
+
+								const SvxFieldData* pFieldData = nullptr;
+
+								if (PortionKind::FIELD == rTextPortion.GetKind())
+								{
+									const EditCharAttrib* pAttr = pPortion->GetNode()->GetCharAttribs().FindFeature(nIndex);
+									const SvxFieldItem* pFieldItem = dynamic_cast<const SvxFieldItem*>(pAttr->GetItem());
+
+									if (pFieldItem)
+									{
+										pFieldData = pFieldItem->GetField();
+									}
+								}
+
+								// support for EOC, EOW, EOS TEXT comments. To support that,
+								// the locale is needed. With the locale and a XBreakIterator it is
+								// possible to re-create the text marking info on primitive level
+								const lang::Locale aLocale(GetLocale(EditPaM(pPortion->GetNode(), nIndex + 1)));
+
+								// create EOL and EOP bools
+								const bool bEndOfLine(nPortion == pLine->GetEndPortion());
+								const bool bEndOfParagraph(bEndOfLine && nLine + 1 == nLines);
+
+								// get Overline color (from ((const SvxOverlineItem*)GetItem())->GetColor() in
+								// consequence, but also already set at pOutDev)
+								const Color aOverlineColor(pOutDev->GetOverlineColor());
+
+								// get TextLine color (from ((const SvxUnderlineItem*)GetItem())->GetColor() in
+								// consequence, but also already set at pOutDev)
+								const Color aTextLineColor(pOutDev->GetTextLineColor());
+
+								// Unicode code points conversion according to ctl text numeral setting
+								aText = convertDigits(aText, nTextStart, nTextLen,
+									ImplCalcDigitLang(aTmpFont.GetLanguage()));
+
+								// StripPortions() data callback
+								GetEditEnginePtr()->DrawingText(aOutPos, aText, nTextStart, nTextLen, pDXArray,
+									aTmpFont, n, rTextPortion.GetRightToLeftLevel(),
+									aWrongSpellVector.size() ? &aWrongSpellVector : nullptr,
+									pFieldData,
+									bEndOfLine, bEndOfParagraph, // support for EOL/EOP TEXT comments
+									&aLocale,
+									aOverlineColor,
+									aTextLineColor);
+
+								// #108052# remember that EOP is written already for this ParaPortion
+								if (bEndOfParagraph)
+								{
+									bEndOfParagraphWritten = true;
+								}
+							}
+							else
+							{
+								short nEsc = aTmpFont.GetEscapement();
+								if (nOrientation)
+								{
+									// In case of high/low do it yourself:
+									if (aTmpFont.GetEscapement())
+									{
+										long nDiff = aTmpFont.GetFontSize().Height() * aTmpFont.GetEscapement() / 100L;
+										if (!IsVertical())
+											aOutPos.Y() -= nDiff;
+										else
+											aOutPos.X() += nDiff;
+										aRedLineTmpPos = aOutPos;
+										aTmpFont.SetEscapement(0);
+									}
+
+									aOutPos = lcl_ImplCalcRotatedPos(aOutPos, aOrigin, nSin, nCos);
+									aTmpFont.SetOrientation(aTmpFont.GetOrientation() + nOrientation);
+									aTmpFont.SetPhysFont(pOutDev);
+
+								}
+
+								// Take only what begins in the visible range:
+								// Important, because of a bug in some graphic cards
+								// when transparent font, output when negative
+								if (nOrientation || (!IsVertical() && ((aTmpPos.X() + nTxtWidth) >= nFirstVisXPos))
+									|| (IsVertical() && ((aTmpPos.Y() + nTxtWidth) >= nFirstVisYPos)))
+								{
+									if (nEsc && ((aTmpFont.GetUnderline() != LINESTYLE_NONE)))
+									{
+										// Paint the high/low without underline,
+										// Display the Underline on the
+										// base line of the original font height ...
+										// But only if there was something underlined before!
+										bool bSpecialUnderline = false;
+										EditCharAttrib* pPrev = pPortion->GetNode()->GetCharAttribs().FindAttrib(EE_CHAR_ESCAPEMENT, nIndex);
+										if (pPrev)
+										{
+											SvxFont aDummy;
+											// Underscore in front?
+											if (pPrev->GetStart())
+											{
+												SeekCursor(pPortion->GetNode(), pPrev->GetStart(), aDummy);
+												if (aDummy.GetUnderline() != LINESTYLE_NONE)
+													bSpecialUnderline = true;
+											}
+											if (!bSpecialUnderline && (pPrev->GetEnd() < pPortion->GetNode()->Len()))
+											{
+												SeekCursor(pPortion->GetNode(), pPrev->GetEnd() + 1, aDummy);
+												if (aDummy.GetUnderline() != LINESTYLE_NONE)
+													bSpecialUnderline = true;
+											}
+										}
+										if (bSpecialUnderline)
+										{
+											Size aSz = aTmpFont.GetPhysTxtSize(pOutDev, aText, nTextStart, nTextLen);
+											sal_uInt8 nProp = aTmpFont.GetPropr();
+											aTmpFont.SetEscapement(0);
+											aTmpFont.SetPropr(100);
+											aTmpFont.SetPhysFont(pOutDev);
+											OUStringBuffer aBlanks;
+											comphelper::string::padToLength(aBlanks, (sal_Int32)nTextLen, ' ');
+											Point aUnderlinePos(aOutPos);
+											if (nOrientation)
+												aUnderlinePos = lcl_ImplCalcRotatedPos(aTmpPos, aOrigin, nSin, nCos);
+											pOutDev->DrawStretchText(aUnderlinePos, aSz.Width(), aBlanks.makeStringAndClear(), 0, nTextLen);
+
+											aTmpFont.SetUnderline(LINESTYLE_NONE);
+											if (!nOrientation)
+												aTmpFont.SetEscapement(nEsc);
+											aTmpFont.SetPropr(nProp);
+											aTmpFont.SetPhysFont(pOutDev);
+										}
+									}
+									Point aRealOutPos(aOutPos);
+									if ((rTextPortion.GetKind() == PortionKind::TEXT)
+										&& rTextPortion.GetExtraInfos() && rTextPortion.GetExtraInfos()->bCompressed
+										&& rTextPortion.GetExtraInfos()->bFirstCharIsRightPunktuation)
+									{
+										aRealOutPos.X() += rTextPortion.GetExtraInfos()->nPortionOffsetX;
+									}
+
+									// RTL portions with (#i37132#)
+									// compressed blank should not paint this blank:
+									if (rTextPortion.IsRightToLeft() && nTextLen >= 2 &&
+										pDXArray[nTextLen - 1] ==
+										pDXArray[nTextLen - 2] &&
+										' ' == aText[nTextStart + nTextLen - 1])
+										--nTextLen;
+
+									// output directly
+									aTmpFont.QuickDrawText(pOutDev, aRealOutPos, aText, nTextStart, nTextLen, pDXArray);
+
+									if (bDrawFrame)
+									{
+										Point aTopLeft(aTmpPos);
+										aTopLeft.Y() -= pLine->GetMaxAscent();
+										if (nOrientation)
+											aTopLeft = lcl_ImplCalcRotatedPos(aTopLeft, aOrigin, nSin, nCos);
+										Rectangle aRect(aTopLeft, rTextPortion.GetSize());
+										pOutDev->DrawRect(aRect);
+									}
+
+									// PDF export:
+									if (pPDFExtOutDevData)
+									{
+										if (rTextPortion.GetKind() == PortionKind::FIELD)
+										{
+											const EditCharAttrib* pAttr = pPortion->GetNode()->GetCharAttribs().FindFeature(nIndex);
+											const SvxFieldItem* pFieldItem = dynamic_cast<const SvxFieldItem*>(pAttr->GetItem());
+											if (pFieldItem)
+											{
+												const SvxFieldData* pFieldData = pFieldItem->GetField();
+												if (dynamic_cast<const SvxURLField*>(pFieldData) != nullptr)
+												{
+													Point aTopLeft(aTmpPos);
+													aTopLeft.Y() -= pLine->GetMaxAscent();
+
+													Rectangle aRect(aTopLeft, rTextPortion.GetSize());
+													vcl::PDFExtOutDevBookmarkEntry aBookmark;
+													aBookmark.nLinkId = pPDFExtOutDevData->CreateLink(aRect);
+													aBookmark.aBookmark = static_cast<const SvxURLField*>(pFieldData)->GetURL();
+													std::vector< vcl::PDFExtOutDevBookmarkEntry >& rBookmarks = pPDFExtOutDevData->GetBookmarks();
+													rBookmarks.push_back(aBookmark);
+												}
+											}
+										}
+									}
+								}
+
+								const WrongList* const pWrongList = pPortion->GetNode()->GetWrongList();
+								if (GetStatus().DoOnlineSpelling() && pWrongList && !pWrongList->empty() && rTextPortion.GetLen())
+								{
+									{//#105750# adjust LinePos for superscript or subscript text
+										short _nEsc = aTmpFont.GetEscapement();
+										if (_nEsc)
+										{
+											long nShift = ((_nEsc*long(aTmpFont.GetFontSize().Height())) / 100L);
+											if (!IsVertical())
+												aRedLineTmpPos.Y() -= nShift;
+											else
+												aRedLineTmpPos.X() += nShift;
+										}
+									}
+									Color aOldColor(pOutDev->GetLineColor());
+									pOutDev->SetLineColor(Color(GetColorConfig().GetColorValue(svtools::SPELL).nColor));
+									lcl_DrawRedLines(pOutDev, aTmpFont.GetFontSize().Height(), aRedLineTmpPos, (size_t)nIndex, (size_t)nIndex + rTextPortion.GetLen(), pDXArray, pPortion->GetNode()->GetWrongList(), nOrientation, aOrigin, IsVertical(), rTextPortion.IsRightToLeft());
+									pOutDev->SetLineColor(aOldColor);
+								}
+							}
+
+							pOutDev->Pop();
+
+							pTmpDXArray.reset();
+
+							if (rTextPortion.GetKind() == PortionKind::FIELD)
+							{
+								const EditCharAttrib* pAttr = pPortion->GetNode()->GetCharAttribs().FindFeature(nIndex);
+								DBG_ASSERT(pAttr, "Field not found");
+								DBG_ASSERT(pAttr && dynamic_cast<const SvxFieldItem*>(pAttr->GetItem()) != nullptr, "Wrong type of field!");
+
+								// add a meta file comment if we record to a metafile
+								if (bMetafileValid)
+								{
+									const SvxFieldItem* pFieldItem = dynamic_cast<const SvxFieldItem*>(pAttr->GetItem());
+
+									if (pFieldItem)
+									{
+										const SvxFieldData* pFieldData = pFieldItem->GetField();
+										if (pFieldData)
+											pMtf->AddAction(SvxFieldData::createEndComment());
+									}
+								}
+
+							}
+
+						}
+						break;
+						case PortionKind::TAB:
+						{
+							if (rTextPortion.GetExtraValue() && (rTextPortion.GetExtraValue() != ' '))
+							{
+								SeekCursor(pPortion->GetNode(), nIndex + 1, aTmpFont, pOutDev);
+								aTmpFont.SetTransparent(false);
+								aTmpFont.SetEscapement(0);
+								aTmpFont.SetPhysFont(pOutDev);
+								long nCharWidth = aTmpFont.QuickGetTextSize(pOutDev,
+									OUString(rTextPortion.GetExtraValue()), 0, 1).Width();
+								sal_Int32 nChars = 2;
+								if (nCharWidth)
+									nChars = rTextPortion.GetSize().Width() / nCharWidth;
+								if (nChars < 2)
+									nChars = 2; // is compressed by DrawStretchText.
+								else if (nChars == 2)
+									nChars = 3; // looks better
+
+								OUStringBuffer aBuf;
+								comphelper::string::padToLength(aBuf, nChars, rTextPortion.GetExtraValue());
+								OUString aText(aBuf.makeStringAndClear());
+								aTmpFont.QuickDrawText(pOutDev, aTmpPos, aText, 0, aText.getLength());
+								pOutDev->DrawStretchText(aTmpPos, rTextPortion.GetSize().Width(), aText);
+
+								if (bStripOnly)
+								{
+									// create EOL and EOP bools
+									const bool bEndOfLine(nPortion == pLine->GetEndPortion());
+									const bool bEndOfParagraph(bEndOfLine && nLine + 1 == nLines);
+
+									const Color aOverlineColor(pOutDev->GetOverlineColor());
+									const Color aTextLineColor(pOutDev->GetTextLineColor());
+
+									// StripPortions() data callback
+									GetEditEnginePtr()->DrawingTab(aTmpPos,
+										rTextPortion.GetSize().Width(),
+										OUString(rTextPortion.GetExtraValue()),
+										aTmpFont, n, rTextPortion.GetRightToLeftLevel(),
+										bEndOfLine, bEndOfParagraph,
+										aOverlineColor, aTextLineColor);
+								}
+							}
+							else if (bStripOnly)
+							{
+								// #i108052# When stripping, a callback for _empty_ paragraphs is also needed.
+								// This was optimized away (by not rendering the space-only tab portion), so do
+								// it manually here.
+								const bool bEndOfLine(nPortion == pLine->GetEndPortion());
+								const bool bEndOfParagraph(bEndOfLine && nLine + 1 == nLines);
+
+								const Color aOverlineColor(pOutDev->GetOverlineColor());
+								const Color aTextLineColor(pOutDev->GetTextLineColor());
+
+								GetEditEnginePtr()->DrawingText(
+									aTmpPos, OUString(), 0, 0, nullptr,
+									aTmpFont, n, 0,
+									nullptr,
+									nullptr,
+									bEndOfLine, bEndOfParagraph,
+									nullptr,
+									aOverlineColor,
+									aTextLineColor);
+							}
+						}
+						break;
+						case PortionKind::LINEBREAK: break;
+						}
+						if (bParsingFields)
+							nPortion--;
+						else
+							nIndex = nIndex + rTextPortion.GetLen();
+
+					}
+				}
+
+				if ((nLine != nLastLine) && !aStatus.IsOutliner())
+				{
+					if (!IsVertical())
+						aStartPos.Y() += nSBL;
+					else
+						aStartPos.X() -= nSBL;
+				}
+
+				// no more visible actions?
+				if (!IsVertical() && (aStartPos.Y() >= aClipRect.Bottom()))
+					break;
+				else if (IsVertical() && (aStartPos.X() <= aClipRect.Left()))
+					break;
+			}
+
+			if (!aStatus.IsOutliner())
+			{
+				const SvxULSpaceItem& rULItem = static_cast<const SvxULSpaceItem&>(pPortion->GetNode()->GetContentAttribs().GetItem(EE_PARA_ULSPACE));
+				long nUL = GetYValue(rULItem.GetLower());
+				if (!IsVertical())
+					aStartPos.Y() += nUL;
+				else
+					aStartPos.X() -= nUL;
+			}
+
+			// #108052# Safer way for #i108052# and #i118881#: If for the current ParaPortion
+			// EOP is not written, do it now. This will be safer than before. It has shown
+			// that the reason for #i108052# was fixed/removed again, so this is a try to fix
+			// the number of paragraphs (and counting empty ones) now independent from the
+			// changes in EditEngine behaviour.
+			if (!bEndOfParagraphWritten && !bPaintBullet && bStripOnly)
+			{
+				const Color aOverlineColor(pOutDev->GetOverlineColor());
+				const Color aTextLineColor(pOutDev->GetTextLineColor());
+
+				GetEditEnginePtr()->DrawingText(
+					aTmpPos, OUString(), 0, 0, nullptr,
+					aTmpFont, n, 0,
+					nullptr,
+					nullptr,
+					false, true, // support for EOL/EOP TEXT comments
+					nullptr,
+					aOverlineColor,
+					aTextLineColor);
+			}
+		}
+		else
+		{
+			if (!IsVertical())
+				aStartPos.Y() += nParaHeight;
+			else
+				aStartPos.X() -= nParaHeight;
+		}
+
+		if (pPDFExtOutDevData)
+			pPDFExtOutDevData->EndStructureElement();
+
+		// no more visible actions?
+		if (!IsVertical() && (aStartPos.Y() > aClipRect.Bottom()))
+			break;
+		if (IsVertical() && (aStartPos.X() < aClipRect.Left()))
+			break;
+	}
+	if (aStatus.DoRestoreFont())
+		pOutDev->SetFont(aOldFont);
+}
+
+#if 0
+void ImpEditEngine::PaintVertL2R(OutputDevice* pOutDev, Rectangle aClipRect, Point aStartPos, bool bStripOnly, short nOrientation, short nVertMode/* = 0*/)
+{
 	if ( !GetUpdateMode() && !bStripOnly )
         return;
 
@@ -4509,6 +5320,7 @@ void ImpEditEngine::PaintVertL2R(OutputDevice* pOutDev, Rectangle aClipRect, Poi
     if ( aStatus.DoRestoreFont() )
         pOutDev->SetFont( aOldFont );
 }
+#endif
 
 void ImpEditEngine::Paint( ImpEditView* pView, const Rectangle& rRect, OutputDevice* pTargetDevice, short nVertMode/* = 0*/ )
 {
@@ -4573,7 +5385,7 @@ void ImpEditEngine::Paint( ImpEditView* pView, const Rectangle& rRect, OutputDev
     vcl::Region aOldRegion = pTarget->GetClipRegion();
     pTarget->IntersectClipRegion( aClipRect );
 
-    Paint( pTarget, aClipRect, aStartPos, nVertMode );
+    Paint( pTarget, aClipRect, aStartPos, false, 0, nVertMode );
 
     if ( bClipRegion )
         pTarget->SetClipRegion( aOldRegion );

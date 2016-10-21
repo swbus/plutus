@@ -511,6 +511,44 @@ Rectangle ImpEditView::GetWindowPos( const Rectangle& rDocRect ) const
     return aRect;
 }
 
+Point ImpEditView::GetWindowPosEx(const Point& rDocPos) const
+{
+	// Document position => window position
+	Point aPoint;
+
+	if (!pEditEngine->pImpEditEngine->IsVertical())
+	{
+		aPoint.X() = rDocPos.X() + aOutArea.Left() - GetVisDocLeft();
+		aPoint.Y() = rDocPos.Y() + aOutArea.Top() - GetVisDocTop();
+	}
+	else
+	{
+		// aPoint.X() = aOutArea.Right() - rDocPos.Y() + GetVisDocTop();
+		aPoint.X() = aOutArea.Left() + rDocPos.Y() - GetVisDocTop();
+		aPoint.Y() = rDocPos.X() + aOutArea.Top() - GetVisDocLeft();
+	}
+
+	return aPoint;
+}
+
+Rectangle ImpEditView::GetWindowPosEx(const Rectangle& rDocRect) const
+{
+	// Document position => window position
+	Point aPos(GetWindowPosEx(rDocRect.TopLeft()));
+	Size aSz = rDocRect.GetSize();
+	Rectangle aRect;
+	if (!pEditEngine->pImpEditEngine->IsVertical())
+	{
+		aRect = Rectangle(aPos, aSz);
+	}
+	else
+	{
+		Point aNewPos(aPos.X()/* - aSz.Height()*/, aPos.Y());
+		aRect = Rectangle(aNewPos, Size(aSz.Height(), aSz.Width()));
+	}
+	return aRect;
+}
+
 void ImpEditView::SetSelectionMode( EESelectionMode eNewMode )
 {
     if ( eSelectionMode != eNewMode )
@@ -908,7 +946,7 @@ void ImpEditView::ShowCursor( bool bGotoCursor, bool bForceVisCursor )
          ( aEditCursor.Left() + nOnePixel >= GetVisDocLeft() ) &&
          ( aEditCursor.Right() - nOnePixel <= GetVisDocRight() ) ) )
     {
-        Rectangle aCursorRect = GetWindowPos( aEditCursor );
+		Rectangle aCursorRect = IsVertL2R() ? GetWindowPosEx(aEditCursor) : GetWindowPos(aEditCursor);
         GetCursor()->SetPos( aCursorRect.TopLeft() );
         Size aCursorSz( aCursorRect.GetSize() );
         // Rectangle is inclusive
